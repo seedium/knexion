@@ -1,0 +1,64 @@
+name: Pull Request
+
+on: [pull_request]
+
+jobs:
+  format:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [16.x]
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Format
+        run: yarn prettier '**/*.ts' --check
+
+  lint:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [16.x]
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Lint source code
+        run: yarn eslint 'packages/**/lib/**/*.ts'
+      - name: Lint test code
+        run: yarn eslint -c .eslintrc.spec.yaml --fix 'packages/**/tests/**/*.spec.ts'
+
+  lint-commit:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [16.x]
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+          configFile: .commitlintrc.json
+      - name: Lint commits
+        uses: wagoid/commitlint-github-action@v4.1.1
+        with:
+          configFile: ./.commitlintrc.json
+          failOnWarnings: true
+
+  build:
+    needs:
+      - format
+      - lint
+      - lint-commit
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [ 16.x ]
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Lint source code
+        run: yarn eslint 'packages/**/lib/**/*.ts'
+      - name: Lint test code
+        run: yarn eslint -c .eslintrc.spec.yaml --fix 'packages/**/tests/**/*.spec.ts'

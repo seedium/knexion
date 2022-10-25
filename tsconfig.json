@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "declaration": false,
+    "removeComments": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "strictPropertyInitialization": false,
+    "strictNullChecks": true,
+    "strict": false,
+    "noLib": false,
+    "target": "es2020",
+    "sourceMap": true,
+    "incremental": true,
+    "skipLibCheck": true,
+    "baseUrl": "./",
+    "outDir": "./dist",
+    "lib": ["es2019", "es2020"]
+  },
+  "include": ["packages/**/*"],
+  "exclude": ["**/*.spec.ts"]
+}

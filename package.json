@@ -1,0 +1,54 @@
+{
+  "name": "knexion",
+  "version": "0.0.0",
+  "description": "Knex",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com:seedium/knexion.git"
+  },
+  "keywords": [
+    "nestjs",
+    "typescript",
+    "seedium",
+    "knex"
+  ],
+  "author": "Seedium <info@seedium.io>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/seedium/knexion/issues"
+  },
+  "homepage": "https://github.com/seedium/knexion#readme",
+  "scripts": {
+    "publish": "yarn lerna --conventional-commit",
+    "build": "lerna exec 'yarn build'",
+    "clean": "lerna exec 'yarn clean'",
+    "test": "lerna exec 'yarn test'",
+    "lint": "concurrently 'yarn lint:test' 'yarn lint:src'",
+    "lint:src": "eslint --fix 'packages/**/lib/**/*.ts'",
+    "lint:test": "eslint -c .eslintrc.spec.yaml --fix 'packages/**/tests/**/*.spec.ts'",
+    "format": "prettier --write '**/*.ts'"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "17.1.2",
+    "@commitlint/config-angular": "17.1.0",
+    "@types/node": "16.18.0",
+    "@typescript-eslint/eslint-plugin": "5.41.0",
+    "@typescript-eslint/parser": "5.41.0",
+    "concurrently": "7.5.0",
+    "conventional-changelog-angular": "5.0.13",
+    "eslint": "8.26.0",
+    "eslint-config-prettier": "8.5.0",
+    "husky": "8.0.1",
+    "knex": "2.3.0",
+    "lerna": "6.0.1",
+    "lint-staged": "13.0.3",
+    "pg": "8.8.0",
+    "prettier": "2.7.1",
+    "tslib": "2.4.0",
+    "typescript": "4.8.4"
+  },
+  "packageManager": "yarn@3.2.4",
+  "workspaces": [
+    "packages/*"
+  ]
+}

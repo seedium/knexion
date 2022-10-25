@@ -1,0 +1,42 @@
+.gitattributes !filter !diff
+
+### Node ###
+/**/.yarn/*
+!/**/.yarn/releases
+!/**/.yarn/plugins
+!/**/.yarn/sdks
+/**/yarn.lock   -diff -merge
+/**/yarn.lock    linguist-generated=true
+
+# Swap the comments on the following lines if you don't wish to use zero-installs
+# Documentation here: https://yarnpkg.com/features/zero-installs
+!/**/.yarn/cache
+#/**/.pnp.*
+
+# NPM
+/node_modules
+
+# IDE
+/**/.idea
+/**/.awcache
+/**/.vscode
+/**/*.code-workspace
+/**/.project
+/**/.classpath
+/**/.c9/
+/**/*.launch
+/**/.settings/
+*.sublime-workspace
+
+# misc
+.DS_Store
+/npm-debug.log
+/yarn-error.log
+
+# Tests
+coverage
+.nyc_output
+
+# Outputs
+packages/**/*.js
+packages/**/*.d.ts
