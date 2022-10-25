@@ -9,7 +9,7 @@ jobs:
       matrix:
         node-version: [16.x]
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           node-version: ${{ matrix.node-version }}
       - name: Format
@@ -21,7 +21,7 @@ jobs:
       matrix:
         node-version: [16.x]
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           node-version: ${{ matrix.node-version }}
       - name: Lint source code
@@ -35,7 +35,7 @@ jobs:
       matrix:
         node-version: [16.x]
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           fetch-depth: 0
           configFile: .commitlintrc.json
@@ -55,7 +55,7 @@ jobs:
       matrix:
         node-version: [ 16.x ]
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           node-version: ${{ matrix.node-version }}
       - name: Install dependencies
