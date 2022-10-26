@@ -1,6 +1,6 @@
 {
   "name": "@knexion/page-pagination",
-  "version": "0.0.0",
+  "version": "0.0.1-alpha.0",
   "description": "> TODO: description",
   "author": "Seedium <info@seedium.io>",
   "homepage": "https://github.com/seedium/knexion/tree/main/packages/page-pagination#readme",
