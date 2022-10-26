@@ -72,7 +72,6 @@ describe('PagePaginationInterceptor', () => {
     await generateTestRecords(3);
     const result = await testRepository.list<PageList<TestRecord>>({
       intercept: [new PagePaginationInterceptor()],
-      // @ts-expect-error Will be extended on repository level
       limit: 2,
     });
     expect(result.data.length).toBe(2);
@@ -82,7 +81,6 @@ describe('PagePaginationInterceptor', () => {
     await generateTestRecords(1);
     const result = await testRepository.list<PageList<TestRecord>>({
       intercept: [new PagePaginationInterceptor()],
-      // @ts-expect-error Will be extended on repository level
       limit: 1,
       page: 1,
     });

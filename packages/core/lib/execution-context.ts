@@ -22,9 +22,10 @@ export class ExecutionContext<
   }
 
   constructor(
-    public readonly buildQueryBuilder: (
-      trx?: Knex.Transaction,
-    ) => Knex.QueryBuilder<TRecord, TResult>,
+    public readonly buildQueryBuilder: () => Knex.QueryBuilder<
+      TRecord,
+      TResult
+    >,
     private readonly _queryBuilder: Knex.QueryBuilder<TRecord, TResult>,
     private readonly _rawBuilder: Knex.RawBuilder<TRecord, TResult>,
     private readonly _constructorRef: Function,

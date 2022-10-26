@@ -212,7 +212,7 @@ export class Repository<
     handler?: Function,
   ): Knex.QueryBuilder<TRecord, TResult> {
     const context = new ExecutionContext(
-      (trx?: Knex.Transaction) => this.pureQueryBuilder(trx),
+      () => this.queryBuilder(options, handler),
       queryBuilder,
       this.rawBuilder(options?.transaction),
       this.constructor,

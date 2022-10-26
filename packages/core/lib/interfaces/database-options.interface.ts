@@ -12,4 +12,6 @@ export interface DatabaseOptions<TRecord, TResult> {
 
 export interface SelectDatabaseOptions<TRecord, TResult>
   extends DatabaseOptions<TRecord, TResult>,
-    AliasableRepositoryDatabaseOptions {}
+    AliasableRepositoryDatabaseOptions {
+  [field: string]: unknown;
+}
