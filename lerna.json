@@ -5,7 +5,7 @@
   "changelogPreset": "angular",
   "command": {
     "version": {
-      "message": "chore: release v%s"
+      "message": "chore: release %s"
     }
   }
 }
