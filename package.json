@@ -21,15 +21,14 @@
   "homepage": "https://github.com/seedium/knexion#readme",
   "scripts": {
     "prebuild": "yarn clean",
-    "build": "lerna exec 'yarn build'",
+    "build": "yarn prebuild && lerna exec 'yarn build'",
     "clean": "lerna exec 'yarn clean'",
     "test": "lerna exec 'yarn test'",
     "lint": "concurrently 'yarn lint:test' 'yarn lint:src'",
     "lint:src": "eslint --fix 'packages/**/lib/**/*.ts'",
     "lint:test": "eslint -c .eslintrc.spec.yaml --fix 'packages/**/tests/**/*.spec.ts'",
     "format": "prettier --write '**/*.ts'",
-    "prepublishOnly": "yarn build",
-    "publish": "yarn lerna version --conventional-commits --create-release github"
+    "publish": "yarn build && yarn lerna version --conventional-commits --create-release github"
   },
   "devDependencies": {
     "@commitlint/cli": "17.1.2",
