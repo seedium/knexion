@@ -74,7 +74,7 @@ export class Repository<
     return record as TRecord;
   }
 
-  public async retrieve<TResult>(
+  public async retrieve<TResult = TRecord>(
     id: Options['idType'],
     options?: SelectDatabaseOptions<TRecord, TResult>,
   ): Promise<TResult | null> {
