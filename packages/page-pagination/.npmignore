@@ -1,0 +1,4 @@
+*
+!package.json
+!*.js
+!*.d.ts
