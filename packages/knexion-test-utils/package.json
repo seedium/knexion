@@ -14,6 +14,7 @@
   },
   "scripts": {
     "build": "echo 'Not need'",
+    "clean": "echo 'Not need'",
     "test": "echo 'Not need'"
   },
   "peerDependencies": {
