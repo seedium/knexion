@@ -6,11 +6,11 @@ import {
   KnexionOptionsFactory,
   Repository,
 } from '../../lib';
-import { generateDatabaseConnectionOptions } from '../utils';
 import { KNEX } from '../../lib/knexion.constants';
 import { defer, lastValueFrom } from 'rxjs';
 import { handleRetry } from '../../lib/knexion.utils';
 import { Module } from '@nestjs/common';
+import { generateDatabaseConnectionOptions } from 'knexion-test-utils';
 
 describe('Module', () => {
   test('should bootstrap sync module', async () => {
