@@ -8,12 +8,18 @@ export interface TestRecord {
   foo: string | null;
 }
 
-export class TestRepository extends Repository<
-  TestRecord,
+export class TestRepository<
+  TRecord extends TestRecord = TestRecord,
+> extends Repository<
+  TRecord,
   { idType: TestRecord['id']; omitCreateFields: 'id'; omitUpdateFields: 'id' }
 > {}
 
-export const buildTestRepository = (): {
+export const buildTestRepository = ({
+  createTable,
+}: {
+  createTable?: (table: Knex.CreateTableBuilder) => void;
+} = {}): {
   name: string;
   init: (knex: Knex) => void;
   forFeature: () => DynamicModule;
@@ -34,6 +40,9 @@ export const buildTestRepository = (): {
       knex.schema.createTable(name, (table) => {
         table.increments('id').primary();
         table.string('foo');
+        if (createTable) {
+          createTable(table);
+        }
       }),
     dropTable: () => knex.schema.dropTable(name),
     truncate: () => knex(name).truncate(),
