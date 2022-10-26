@@ -28,7 +28,8 @@
     "lint:src": "eslint --fix 'packages/**/lib/**/*.ts'",
     "lint:test": "eslint -c .eslintrc.spec.yaml --fix 'packages/**/tests/**/*.spec.ts'",
     "format": "prettier --write '**/*.ts'",
-    "publish": "yarn build && yarn lerna version --conventional-commits --create-release github"
+    "prepublish": "yarn build",
+    "release": "yarn lerna version --conventional-commits --create-release github"
   },
   "devDependencies": {
     "@commitlint/cli": "17.1.2",
