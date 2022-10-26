@@ -1,46 +1,45 @@
 import { Knex } from 'knex';
-import { generateDatabaseConnectionOptions, getKnex } from '../utils';
-import { EntityRepository, KnexionModule, Repository } from '../../lib';
 import { Test, TestingModule } from '@nestjs/testing';
 import { faker } from '@faker-js/faker';
-
-const testTableName = faker.word.noun().toLowerCase();
-
-@EntityRepository({ name: testTableName })
-class TestRepository extends Repository<
-  { id: number; foo: string | null },
-  { idType: number; omitCreateFields: 'id'; omitUpdateFields: 'id' }
-> {}
+import {
+  TestRepository,
+  buildTestKnexionModule,
+  buildTestRepository,
+  getKnex,
+} from 'knexion-test-utils';
 
 describe('Repository', () => {
+  const {
+    name: testTableName,
+    init,
+    forFeature,
+    createTable,
+    dropTable,
+    truncate,
+  } = buildTestRepository();
+
   let knex: Knex;
-  let testRepository: TestRepository;
   let app: TestingModule;
+  let testRepository: TestRepository;
+
   beforeAll(async () => {
     knex = await getKnex();
-    await knex.schema.createTable(testTableName, (table) => {
-      table.increments('id').primary();
-      table.string('foo');
-    });
+    init(knex);
+    await createTable();
     app = await Test.createTestingModule({
-      imports: [
-        KnexionModule.forRoot({
-          client: 'pg',
-          connection: generateDatabaseConnectionOptions(),
-        }),
-        KnexionModule.forFeature([TestRepository]),
-      ],
+      imports: [buildTestKnexionModule(), forFeature()],
     }).compile();
     testRepository = app.get(TestRepository);
   });
   afterAll(async () => {
-    await knex.schema.dropTable(testTableName);
+    await dropTable();
     await knex.destroy();
     await app.close();
   });
   afterEach(async () => {
-    await knex(testTableName).truncate();
+    await truncate();
   });
+
   describe('list', () => {
     test('should retrieve empty array', async () => {
       const result = await testRepository.list();

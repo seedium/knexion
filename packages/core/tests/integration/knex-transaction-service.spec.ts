@@ -1,7 +1,7 @@
 import { KnexionTransactionService } from '../../lib';
 import { Knex } from 'knex';
-import { getKnex } from '../utils';
 import { faker } from '@faker-js/faker';
+import { getKnex } from 'knexion-test-utils';
 
 const fixtureTableName = faker.word.noun().toLowerCase();
 

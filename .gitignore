@@ -40,3 +40,4 @@ coverage
 # Outputs
 packages/**/*.js
 packages/**/*.d.ts
+!packages/*/jest.config.js

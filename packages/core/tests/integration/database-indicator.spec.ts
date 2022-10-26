@@ -1,7 +1,7 @@
 import { DatabaseHealthIndicator } from '../../lib';
-import { getKnex } from '../utils';
 import knexFactory, { Knex } from 'knex';
 import { HealthCheckError } from '@nestjs/terminus';
+import { getKnex } from 'knexion-test-utils';
 
 describe('Database Indicator', () => {
   let knex: Knex;

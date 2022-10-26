@@ -659,7 +659,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@faker-js/faker@npm:7.6.0":
+"@faker-js/faker@npm:7.6.0, @faker-js/faker@npm:^7.6.0":
   version: 7.6.0
   resolution: "@faker-js/faker@npm:7.6.0"
   checksum: 942af6221774e8c98a0eb6bc75265e05fb81a941170377666c3439aab9495dd321d6beedc5406f07e6ad44262b3e43c20961f666d116ad150b78e7437dd1bb2b
@@ -1024,7 +1024,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@knexion/core@workspace:packages/core":
+"@knexion/core@workspace:^, @knexion/core@workspace:packages/core":
   version: 0.0.0-use.local
   resolution: "@knexion/core@workspace:packages/core"
   dependencies:
@@ -1037,6 +1037,7 @@ __metadata:
     "@types/node": 16.18.0
     jest: 29.2.2
     knex: 2.3.0
+    knexion-test-utils: "workspace:^"
     reflect-metadata: 0.1.13
     rxjs: 7.5.7
     ts-jest: 29.0.3
@@ -6426,6 +6427,27 @@ __metadata:
   checksum: ec00da6dd622a386507881e9d8ad44b9c5a4d9f272889b181cafb856fd26d7fdb19ef009cecdbbdedaf7c76f985a8fd14348ae47a0bb77b3dbec15f2c03c0dfe
   languageName: node
   linkType: hard
+
+"knexion-test-utils@workspace:^, knexion-test-utils@workspace:packages/knexion-test-utils":
+  version: 0.0.0-use.local
+  resolution: "knexion-test-utils@workspace:packages/knexion-test-utils"
+  dependencies:
+    "@faker-js/faker": ^7.6.0
+    "@knexion/core": "workspace:^"
+    "@nestjs/common": 9.1.6
+    "@nestjs/core": 9.1.6
+    knex: 2.3.0
+    reflect-metadata: 0.1.13
+    rxjs: 7.5.7
+    tslib: 2.4.0
+  peerDependencies:
+    "@nestjs/common": ^8.0.0 || ^9.0.0
+    "@nestjs/core": ^8.0.0 || ^9.0.0
+    knex: ^2.3.0
+    reflect-metadata: ^0.1.13
+    rxjs: ^7.2.0
+  languageName: unknown
+  linkType: soft
 
 "knexion@workspace:.":
   version: 0.0.0-use.local

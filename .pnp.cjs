@@ -18,13 +18,18 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
       {\
         "name": "@knexion/core",\
         "reference": "workspace:packages/core"\
+      },\
+      {\
+        "name": "knexion-test-utils",\
+        "reference": "workspace:packages/knexion-test-utils"\
       }\
     ],\
     "enableTopLevelFallback": true,\
     "ignorePatternData": "(^(?:\\\\.yarn\\\\/sdks(?:\\\\/(?!\\\\.{1,2}(?:\\\\/|$))(?:(?:(?!(?:^|\\\\/)\\\\.{1,2}(?:\\\\/|$)).)*?)|$))$)",\
     "fallbackExclusionList": [\
-      ["@knexion/core", ["workspace:packages/core"]],\
-      ["knexion", ["workspace:."]]\
+      ["@knexion/core", ["virtual:3aec43cea6dc4660ac6334a335dae0189587e3f9916f01b1459e7224e0298612046a223f3272ec480f1a5a5a644266d2f900c21734d0baf60ae4b1ef952451f0#workspace:packages/core", "virtual:9a9781ba6366f1eef1f192004c88fb8cccb82c5fcc7fa81b2af98b9fdb4318c8755b2b1ab492482bd3c231a462d49f33b5fb6ce79d8f5c55de06e00c2f43481f#workspace:packages/core", "workspace:packages/core"]],\
+      ["knexion", ["workspace:."]],\
+      ["knexion-test-utils", ["virtual:c26d04eaa466cff0d462370274ddb85385b330a8cad28720ac6da81b1fe844da0127444795e52f37f1b2677307d0cb7fb59a428e202f80c4e91069629ab915dc#workspace:packages/knexion-test-utils", "virtual:ed66cff0f9f4c9d10838046a7e70c9f271139bebb00c1200d90fb4bb3dc0cba477174e4323d89084328c18f197db6cce84ccf029f20cee7dac8cee84514be643#workspace:packages/knexion-test-utils", "workspace:packages/knexion-test-utils"]]\
     ],\
     "fallbackPool": [\
     ],\
@@ -1524,6 +1529,88 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["@knexion/core", [\
+        ["virtual:3aec43cea6dc4660ac6334a335dae0189587e3f9916f01b1459e7224e0298612046a223f3272ec480f1a5a5a644266d2f900c21734d0baf60ae4b1ef952451f0#workspace:packages/core", {\
+          "packageLocation": "./.yarn/__virtual__/@knexion-core-virtual-281fcf81e9/1/packages/core/",\
+          "packageDependencies": [\
+            ["@knexion/core", "virtual:3aec43cea6dc4660ac6334a335dae0189587e3f9916f01b1459e7224e0298612046a223f3272ec480f1a5a5a644266d2f900c21734d0baf60ae4b1ef952451f0#workspace:packages/core"],\
+            ["@faker-js/faker", "npm:7.6.0"],\
+            ["@nestjs/common", "virtual:c26d04eaa466cff0d462370274ddb85385b330a8cad28720ac6da81b1fe844da0127444795e52f37f1b2677307d0cb7fb59a428e202f80c4e91069629ab915dc#npm:9.1.6"],\
+            ["@nestjs/core", "virtual:c26d04eaa466cff0d462370274ddb85385b330a8cad28720ac6da81b1fe844da0127444795e52f37f1b2677307d0cb7fb59a428e202f80c4e91069629ab915dc#npm:9.1.6"],\
+            ["@nestjs/terminus", "virtual:c26d04eaa466cff0d462370274ddb85385b330a8cad28720ac6da81b1fe844da0127444795e52f37f1b2677307d0cb7fb59a428e202f80c4e91069629ab915dc#npm:9.1.2"],\
+            ["@nestjs/testing", "virtual:c26d04eaa466cff0d462370274ddb85385b330a8cad28720ac6da81b1fe844da0127444795e52f37f1b2677307d0cb7fb59a428e202f80c4e91069629ab915dc#npm:9.1.6"],\
+            ["@types/jest", "npm:29.2.0"],\
+            ["@types/knex", null],\
+            ["@types/nestjs__common", null],\
+            ["@types/nestjs__core", null],\
+            ["@types/nestjs__terminus", null],\
+            ["@types/node", "npm:16.18.0"],\
+            ["@types/reflect-metadata", null],\
+            ["@types/rxjs", null],\
+            ["jest", "virtual:c26d04eaa466cff0d462370274ddb85385b330a8cad28720ac6da81b1fe844da0127444795e52f37f1b2677307d0cb7fb59a428e202f80c4e91069629ab915dc#npm:29.2.2"],\
+            ["knex", "virtual:c26d04eaa466cff0d462370274ddb85385b330a8cad28720ac6da81b1fe844da0127444795e52f37f1b2677307d0cb7fb59a428e202f80c4e91069629ab915dc#npm:2.3.0"],\
+            ["knexion-test-utils", "virtual:c26d04eaa466cff0d462370274ddb85385b330a8cad28720ac6da81b1fe844da0127444795e52f37f1b2677307d0cb7fb59a428e202f80c4e91069629ab915dc#workspace:packages/knexion-test-utils"],\
+            ["reflect-metadata", "npm:0.1.13"],\
+            ["rxjs", "npm:7.5.7"],\
+            ["ts-jest", "virtual:c26d04eaa466cff0d462370274ddb85385b330a8cad28720ac6da81b1fe844da0127444795e52f37f1b2677307d0cb7fb59a428e202f80c4e91069629ab915dc#npm:29.0.3"],\
+            ["tslib", "npm:2.4.0"],\
+            ["typescript", "patch:typescript@npm%3A4.8.4#~builtin<compat/typescript>::version=4.8.4&hash=701156"]\
+          ],\
+          "packagePeers": [\
+            "@nestjs/common",\
+            "@nestjs/core",\
+            "@types/knex",\
+            "@types/nestjs__common",\
+            "@types/nestjs__core",\
+            "@types/nestjs__terminus",\
+            "@types/reflect-metadata",\
+            "@types/rxjs",\
+            "knex",\
+            "reflect-metadata",\
+            "rxjs"\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:9a9781ba6366f1eef1f192004c88fb8cccb82c5fcc7fa81b2af98b9fdb4318c8755b2b1ab492482bd3c231a462d49f33b5fb6ce79d8f5c55de06e00c2f43481f#workspace:packages/core", {\
+          "packageLocation": "./.yarn/__virtual__/@knexion-core-virtual-ed66cff0f9/1/packages/core/",\
+          "packageDependencies": [\
+            ["@knexion/core", "virtual:9a9781ba6366f1eef1f192004c88fb8cccb82c5fcc7fa81b2af98b9fdb4318c8755b2b1ab492482bd3c231a462d49f33b5fb6ce79d8f5c55de06e00c2f43481f#workspace:packages/core"],\
+            ["@faker-js/faker", "npm:7.6.0"],\
+            ["@nestjs/common", "virtual:c26d04eaa466cff0d462370274ddb85385b330a8cad28720ac6da81b1fe844da0127444795e52f37f1b2677307d0cb7fb59a428e202f80c4e91069629ab915dc#npm:9.1.6"],\
+            ["@nestjs/core", "virtual:c26d04eaa466cff0d462370274ddb85385b330a8cad28720ac6da81b1fe844da0127444795e52f37f1b2677307d0cb7fb59a428e202f80c4e91069629ab915dc#npm:9.1.6"],\
+            ["@nestjs/terminus", "virtual:c26d04eaa466cff0d462370274ddb85385b330a8cad28720ac6da81b1fe844da0127444795e52f37f1b2677307d0cb7fb59a428e202f80c4e91069629ab915dc#npm:9.1.2"],\
+            ["@nestjs/testing", "virtual:c26d04eaa466cff0d462370274ddb85385b330a8cad28720ac6da81b1fe844da0127444795e52f37f1b2677307d0cb7fb59a428e202f80c4e91069629ab915dc#npm:9.1.6"],\
+            ["@types/jest", "npm:29.2.0"],\
+            ["@types/knex", null],\
+            ["@types/nestjs__common", null],\
+            ["@types/nestjs__core", null],\
+            ["@types/nestjs__terminus", null],\
+            ["@types/node", "npm:16.18.0"],\
+            ["@types/reflect-metadata", null],\
+            ["@types/rxjs", null],\
+            ["jest", "virtual:c26d04eaa466cff0d462370274ddb85385b330a8cad28720ac6da81b1fe844da0127444795e52f37f1b2677307d0cb7fb59a428e202f80c4e91069629ab915dc#npm:29.2.2"],\
+            ["knex", "virtual:c26d04eaa466cff0d462370274ddb85385b330a8cad28720ac6da81b1fe844da0127444795e52f37f1b2677307d0cb7fb59a428e202f80c4e91069629ab915dc#npm:2.3.0"],\
+            ["knexion-test-utils", "virtual:ed66cff0f9f4c9d10838046a7e70c9f271139bebb00c1200d90fb4bb3dc0cba477174e4323d89084328c18f197db6cce84ccf029f20cee7dac8cee84514be643#workspace:packages/knexion-test-utils"],\
+            ["reflect-metadata", "npm:0.1.13"],\
+            ["rxjs", "npm:7.5.7"],\
+            ["ts-jest", "virtual:c26d04eaa466cff0d462370274ddb85385b330a8cad28720ac6da81b1fe844da0127444795e52f37f1b2677307d0cb7fb59a428e202f80c4e91069629ab915dc#npm:29.0.3"],\
+            ["tslib", "npm:2.4.0"],\
+            ["typescript", "patch:typescript@npm%3A4.8.4#~builtin<compat/typescript>::version=4.8.4&hash=701156"]\
+          ],\
+          "packagePeers": [\
+            "@nestjs/common",\
+            "@nestjs/core",\
+            "@types/knex",\
+            "@types/nestjs__common",\
+            "@types/nestjs__core",\
+            "@types/nestjs__terminus",\
+            "@types/reflect-metadata",\
+            "@types/rxjs",\
+            "knex",\
+            "reflect-metadata",\
+            "rxjs"\
+          ],\
+          "linkType": "SOFT"\
+        }],\
         ["workspace:packages/core", {\
           "packageLocation": "./packages/core/",\
           "packageDependencies": [\
@@ -1537,6 +1624,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/node", "npm:16.18.0"],\
             ["jest", "virtual:c26d04eaa466cff0d462370274ddb85385b330a8cad28720ac6da81b1fe844da0127444795e52f37f1b2677307d0cb7fb59a428e202f80c4e91069629ab915dc#npm:29.2.2"],\
             ["knex", "virtual:c26d04eaa466cff0d462370274ddb85385b330a8cad28720ac6da81b1fe844da0127444795e52f37f1b2677307d0cb7fb59a428e202f80c4e91069629ab915dc#npm:2.3.0"],\
+            ["knexion-test-utils", "virtual:c26d04eaa466cff0d462370274ddb85385b330a8cad28720ac6da81b1fe844da0127444795e52f37f1b2677307d0cb7fb59a428e202f80c4e91069629ab915dc#workspace:packages/knexion-test-utils"],\
             ["reflect-metadata", "npm:0.1.13"],\
             ["rxjs", "npm:7.5.7"],\
             ["ts-jest", "virtual:c26d04eaa466cff0d462370274ddb85385b330a8cad28720ac6da81b1fe844da0127444795e52f37f1b2677307d0cb7fb59a428e202f80c4e91069629ab915dc#npm:29.0.3"],\
@@ -7957,6 +8045,87 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["prettier", "npm:2.7.1"],\
             ["tslib", "npm:2.4.0"],\
             ["typescript", "patch:typescript@npm%3A4.8.4#~builtin<compat/typescript>::version=4.8.4&hash=701156"]\
+          ],\
+          "linkType": "SOFT"\
+        }]\
+      ]],\
+      ["knexion-test-utils", [\
+        ["virtual:c26d04eaa466cff0d462370274ddb85385b330a8cad28720ac6da81b1fe844da0127444795e52f37f1b2677307d0cb7fb59a428e202f80c4e91069629ab915dc#workspace:packages/knexion-test-utils", {\
+          "packageLocation": "./.yarn/__virtual__/knexion-test-utils-virtual-3aec43cea6/1/packages/knexion-test-utils/",\
+          "packageDependencies": [\
+            ["knexion-test-utils", "virtual:c26d04eaa466cff0d462370274ddb85385b330a8cad28720ac6da81b1fe844da0127444795e52f37f1b2677307d0cb7fb59a428e202f80c4e91069629ab915dc#workspace:packages/knexion-test-utils"],\
+            ["@faker-js/faker", "npm:7.6.0"],\
+            ["@knexion/core", "virtual:3aec43cea6dc4660ac6334a335dae0189587e3f9916f01b1459e7224e0298612046a223f3272ec480f1a5a5a644266d2f900c21734d0baf60ae4b1ef952451f0#workspace:packages/core"],\
+            ["@nestjs/common", "virtual:c26d04eaa466cff0d462370274ddb85385b330a8cad28720ac6da81b1fe844da0127444795e52f37f1b2677307d0cb7fb59a428e202f80c4e91069629ab915dc#npm:9.1.6"],\
+            ["@nestjs/core", "virtual:c26d04eaa466cff0d462370274ddb85385b330a8cad28720ac6da81b1fe844da0127444795e52f37f1b2677307d0cb7fb59a428e202f80c4e91069629ab915dc#npm:9.1.6"],\
+            ["@types/knex", null],\
+            ["@types/nestjs__common", null],\
+            ["@types/nestjs__core", null],\
+            ["@types/reflect-metadata", null],\
+            ["@types/rxjs", null],\
+            ["knex", "virtual:c26d04eaa466cff0d462370274ddb85385b330a8cad28720ac6da81b1fe844da0127444795e52f37f1b2677307d0cb7fb59a428e202f80c4e91069629ab915dc#npm:2.3.0"],\
+            ["reflect-metadata", "npm:0.1.13"],\
+            ["rxjs", "npm:7.5.7"],\
+            ["tslib", "npm:2.4.0"]\
+          ],\
+          "packagePeers": [\
+            "@nestjs/common",\
+            "@nestjs/core",\
+            "@types/knex",\
+            "@types/nestjs__common",\
+            "@types/nestjs__core",\
+            "@types/reflect-metadata",\
+            "@types/rxjs",\
+            "knex",\
+            "reflect-metadata",\
+            "rxjs"\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:ed66cff0f9f4c9d10838046a7e70c9f271139bebb00c1200d90fb4bb3dc0cba477174e4323d89084328c18f197db6cce84ccf029f20cee7dac8cee84514be643#workspace:packages/knexion-test-utils", {\
+          "packageLocation": "./.yarn/__virtual__/knexion-test-utils-virtual-7867077121/1/packages/knexion-test-utils/",\
+          "packageDependencies": [\
+            ["knexion-test-utils", "virtual:ed66cff0f9f4c9d10838046a7e70c9f271139bebb00c1200d90fb4bb3dc0cba477174e4323d89084328c18f197db6cce84ccf029f20cee7dac8cee84514be643#workspace:packages/knexion-test-utils"],\
+            ["@faker-js/faker", "npm:7.6.0"],\
+            ["@knexion/core", "virtual:9a9781ba6366f1eef1f192004c88fb8cccb82c5fcc7fa81b2af98b9fdb4318c8755b2b1ab492482bd3c231a462d49f33b5fb6ce79d8f5c55de06e00c2f43481f#workspace:packages/core"],\
+            ["@nestjs/common", "virtual:c26d04eaa466cff0d462370274ddb85385b330a8cad28720ac6da81b1fe844da0127444795e52f37f1b2677307d0cb7fb59a428e202f80c4e91069629ab915dc#npm:9.1.6"],\
+            ["@nestjs/core", "virtual:c26d04eaa466cff0d462370274ddb85385b330a8cad28720ac6da81b1fe844da0127444795e52f37f1b2677307d0cb7fb59a428e202f80c4e91069629ab915dc#npm:9.1.6"],\
+            ["@types/knex", null],\
+            ["@types/nestjs__common", null],\
+            ["@types/nestjs__core", null],\
+            ["@types/reflect-metadata", null],\
+            ["@types/rxjs", null],\
+            ["knex", "virtual:c26d04eaa466cff0d462370274ddb85385b330a8cad28720ac6da81b1fe844da0127444795e52f37f1b2677307d0cb7fb59a428e202f80c4e91069629ab915dc#npm:2.3.0"],\
+            ["reflect-metadata", "npm:0.1.13"],\
+            ["rxjs", "npm:7.5.7"],\
+            ["tslib", "npm:2.4.0"]\
+          ],\
+          "packagePeers": [\
+            "@nestjs/common",\
+            "@nestjs/core",\
+            "@types/knex",\
+            "@types/nestjs__common",\
+            "@types/nestjs__core",\
+            "@types/reflect-metadata",\
+            "@types/rxjs",\
+            "knex",\
+            "reflect-metadata",\
+            "rxjs"\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["workspace:packages/knexion-test-utils", {\
+          "packageLocation": "./packages/knexion-test-utils/",\
+          "packageDependencies": [\
+            ["knexion-test-utils", "workspace:packages/knexion-test-utils"],\
+            ["@faker-js/faker", "npm:7.6.0"],\
+            ["@knexion/core", "virtual:9a9781ba6366f1eef1f192004c88fb8cccb82c5fcc7fa81b2af98b9fdb4318c8755b2b1ab492482bd3c231a462d49f33b5fb6ce79d8f5c55de06e00c2f43481f#workspace:packages/core"],\
+            ["@nestjs/common", "virtual:c26d04eaa466cff0d462370274ddb85385b330a8cad28720ac6da81b1fe844da0127444795e52f37f1b2677307d0cb7fb59a428e202f80c4e91069629ab915dc#npm:9.1.6"],\
+            ["@nestjs/core", "virtual:c26d04eaa466cff0d462370274ddb85385b330a8cad28720ac6da81b1fe844da0127444795e52f37f1b2677307d0cb7fb59a428e202f80c4e91069629ab915dc#npm:9.1.6"],\
+            ["knex", "virtual:c26d04eaa466cff0d462370274ddb85385b330a8cad28720ac6da81b1fe844da0127444795e52f37f1b2677307d0cb7fb59a428e202f80c4e91069629ab915dc#npm:2.3.0"],\
+            ["reflect-metadata", "npm:0.1.13"],\
+            ["rxjs", "npm:7.5.7"],\
+            ["tslib", "npm:2.4.0"]\
           ],\
           "linkType": "SOFT"\
         }]\

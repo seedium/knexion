@@ -1,57 +1,55 @@
 import {
   EntityRepository,
   ExecutionContext,
-  KnexionModule,
   Repository,
   RepositoryInterceptor,
   RepositoryInterceptorNext,
   UseRepositoryInterceptors,
 } from '../../lib';
-import { generateDatabaseConnectionOptions, getKnex } from '../utils';
 import { faker } from '@faker-js/faker';
 import { Knex } from 'knex';
 import { Test, TestingModule } from '@nestjs/testing';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { ModuleRef, Reflector } from '@nestjs/core';
-
-const testTableName = faker.word.noun().toLowerCase();
-
-@EntityRepository({ name: testTableName })
-class TestRepository extends Repository<
-  { id: number; foo: string | null },
-  { idType: number; omitCreateFields: 'id'; omitUpdateFields: 'id' }
-> {}
+import {
+  buildTestKnexionModule,
+  buildTestRepository,
+  getKnex,
+  TestRepository,
+} from 'knexion-test-utils';
 
 describe('Interceptors', () => {
+  const {
+    name: testTableName,
+    init,
+    forFeature,
+    createTable,
+    dropTable,
+    truncate,
+  } = buildTestRepository();
+
   let knex: Knex;
   let testRepository: TestRepository;
   let app: TestingModule;
+
   beforeAll(async () => {
     knex = await getKnex();
-    await knex.schema.createTable(testTableName, (table) => {
-      table.increments('id').primary();
-      table.string('foo');
-    });
+    init(knex);
+    await createTable();
     app = await Test.createTestingModule({
-      imports: [
-        KnexionModule.forRoot({
-          client: 'pg',
-          connection: generateDatabaseConnectionOptions(),
-        }),
-        KnexionModule.forFeature([TestRepository]),
-      ],
+      imports: [buildTestKnexionModule(), forFeature()],
     }).compile();
     testRepository = app.get(TestRepository);
   });
   afterAll(async () => {
-    await knex.schema.dropTable(testTableName);
+    await dropTable();
     await knex.destroy();
     await app.close();
   });
 
   afterEach(async () => {
-    await knex(testTableName).truncate();
+    await truncate();
   });
 
   test('should intercept query with additional select', async () => {
@@ -66,7 +64,7 @@ describe('Interceptors', () => {
     }
     await knex(testTableName).insert({ foo: faker.random.word() });
     const result = await testRepository.list({
-      intercept: [new TestInterceptor()],
+      intercept: [new TestInterceptor() as any],
     });
     expect(result).toMatchObject([{ intercepted: 1 }]);
   });
@@ -88,7 +86,7 @@ describe('Interceptors', () => {
     }
     await knex(testTableName).insert({ foo: faker.random.word() });
     const result = await testRepository.list({
-      intercept: [new TestInterceptor()],
+      intercept: [new TestInterceptor() as any],
     });
     expect(result).toMatchObject([{ intercepted: 1 }]);
   });
@@ -105,7 +103,7 @@ describe('Interceptors', () => {
       }
     }
     await testRepository.list({
-      intercept: [new TestInterceptor()],
+      intercept: [new TestInterceptor() as any],
     });
   });
 
