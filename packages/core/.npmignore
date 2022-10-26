@@ -1,4 +1,6 @@
 *
 !package.json
-!*.js
+!lib/**/*.js
+!index.js
+!index.d.ts
 !*.d.ts
