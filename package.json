@@ -2,6 +2,7 @@
   "name": "knexion",
   "version": "0.0.0",
   "description": "Knex",
+  "private": true,
   "repository": {
     "type": "git",
     "url": "git+https://github.com:seedium/knexion.git"
@@ -19,7 +20,7 @@
   },
   "homepage": "https://github.com/seedium/knexion#readme",
   "scripts": {
-    "publish": "yarn lerna --conventional-commit",
+    "publish": "yarn lerna version --conventional-commits --create-release github",
     "build": "lerna exec 'yarn build'",
     "clean": "lerna exec 'yarn clean'",
     "test": "lerna exec 'yarn test'",

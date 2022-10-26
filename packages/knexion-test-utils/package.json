@@ -2,6 +2,7 @@
   "name": "knexion-test-utils",
   "version": "0.0.0",
   "description": "> TODO: description",
+  "private": true,
   "author": "Kostya Zgara <k.zgara@seedium.io>",
   "homepage": "https://github.com/seedium/knexion/tree/main/packages/knexion-test-utils#readme",
   "license": "MIT",
