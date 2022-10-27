@@ -19,7 +19,6 @@ export interface KnexionModuleOptions extends Knex.Config {
    * @param err error that was thrown
    * @returns whether to retry connection or not
    */
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   toRetry?: (err: any) => boolean;
   /**
    * If `true`, will show verbose error messages on each connection retry.
@@ -36,10 +35,8 @@ export interface KnexionModuleAsyncOptions
   useExisting?: Type<KnexionOptionsFactory>;
   useClass?: Type<KnexionOptionsFactory>;
   useFactory?: (
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     ...args: any[]
   ) => Promise<KnexionModuleOptions> | KnexionModuleOptions;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   inject?: any[];
   extraProviders?: Provider[];
 }

@@ -1,27 +1,32 @@
 import { Observable } from 'rxjs';
 import { ExecutionContext } from '../execution-context';
+import { DatabaseOptions } from './database-options.interface';
 
 export interface RepositoryInterceptorNext<T = unknown> {
   handle(): Observable<T>;
 }
 
 export interface RepositoryInterceptor<
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   TRecord = any,
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   TResult = any,
+  Options extends DatabaseOptions<TRecord, TResult> = DatabaseOptions<
+    TRecord,
+    TResult
+  >,
   TInput = unknown,
   TOutput = TInput,
 > {
   intercept(
-    context: ExecutionContext<TRecord, TResult>,
+    context: ExecutionContext<TRecord, TResult, Options>,
     next: RepositoryInterceptorNext<TInput>,
   ): Observable<TOutput> | Promise<Observable<TOutput>>;
 }
 
 export type RepositoryInterceptors<
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   TRecord = any,
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   TResult = any,
-> = RepositoryInterceptor<TRecord, TResult>[];
+  Options extends DatabaseOptions<TRecord, TResult> = DatabaseOptions<
+    TRecord,
+    TResult
+  >,
+> = RepositoryInterceptor<TRecord, TResult, Options>[];
