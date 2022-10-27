@@ -1,4 +1,4 @@
-import { DatabaseHealthIndicator } from '../../lib';
+import { DatabaseHealthIndicator } from '../..';
 import knexFactory, { Knex } from 'knex';
 import { HealthCheckError } from '@nestjs/terminus';
 import { getKnex } from 'knexion-test-utils';

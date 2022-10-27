@@ -8,8 +8,8 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { Knex } from 'knex';
 import { FieldTransform, FieldTransformInterceptor } from '../lib';
 import { faker } from '@faker-js/faker';
-import { UseRepositoryInterceptors } from '@knexion/core/lib';
-import { REPOSITORY_INTERCEPTORS } from '@knexion/core/lib/knexion.constants';
+import { UseKnexionInterceptors } from '@knexion/core/lib';
+import { KNEXION_INTERCEPTORS } from '@knexion/core/lib/knexion.constants';
 import { FIELD_TRANSFORM_SCHEMA } from '../lib/transform.constants';
 
 describe('FieldTransformInterceptor', () => {
@@ -41,13 +41,13 @@ describe('FieldTransformInterceptor', () => {
   });
   afterEach(async () => {
     await truncate();
-    Reflect.deleteMetadata(REPOSITORY_INTERCEPTORS, TestRepository);
+    Reflect.deleteMetadata(KNEXION_INTERCEPTORS, TestRepository);
     Reflect.deleteMetadata(FIELD_TRANSFORM_SCHEMA, TestRepository);
   });
 
   test('should transform field foo', async () => {
     const fakeTransformed = faker.random.word();
-    UseRepositoryInterceptors(FieldTransformInterceptor)(TestRepository);
+    UseKnexionInterceptors(FieldTransformInterceptor)(TestRepository);
     FieldTransform({ schema: { foo: () => fakeTransformed } })(TestRepository);
     await testRepository.onModuleInit();
     const [fixtureRecord] = await knex(testTableName).insert(

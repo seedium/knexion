@@ -1,7 +1,7 @@
 import { Knex } from 'knex';
 import { DatabaseOptions } from './interfaces';
 
-export class ExecutionContext<
+export class KnexionContext<
   TRecord,
   TResult = unknown,
   Options extends DatabaseOptions<TRecord, TResult> = DatabaseOptions<

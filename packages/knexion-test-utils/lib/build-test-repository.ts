@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker';
-import { EntityRepository, KnexionModule, Repository } from '@knexion/core';
+import { KnexionRepository, KnexionModule, Repository } from '@knexion/core';
 import { Knex } from 'knex';
 import { DynamicModule } from '@nestjs/common';
 
@@ -30,7 +30,7 @@ export const buildTestRepository = ({
   let knex: Knex;
   const name = faker.word.noun().toLowerCase();
 
-  EntityRepository({ name })(TestRepository);
+  KnexionRepository({ name })(TestRepository);
 
   return {
     name,

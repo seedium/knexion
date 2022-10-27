@@ -1,26 +1,26 @@
 import { Observable } from 'rxjs';
 import {
   addPrefixColumn,
-  ExecutionContext,
-  RepositoryInterceptor,
-  RepositoryInterceptorNext,
+  KnexionContext,
+  KnexionInterceptor,
+  KnexionCallHandler,
   SelectDatabaseOptions,
 } from '@knexion/core';
 import { FilterObject, FilterObjectOptions } from '../interfaces';
 import { isPlainObject } from '@nestjs/common/utils/shared.utils';
 
 export class FilterInterceptor<TRecord, TResult>
-  implements RepositoryInterceptor<TRecord, TResult>
+  implements KnexionInterceptor<TRecord, TResult>
 {
   constructor(private readonly options: FilterObjectOptions = {}) {}
 
   public intercept(
-    context: ExecutionContext<
+    context: KnexionContext<
       TRecord,
       TResult,
       SelectDatabaseOptions<TRecord, TResult>
     >,
-    next: RepositoryInterceptorNext,
+    next: KnexionCallHandler,
   ): Observable<unknown> {
     const filterObject = context.options[this.options.optionKey ?? 'filter'];
     if (isPlainObject(filterObject)) {

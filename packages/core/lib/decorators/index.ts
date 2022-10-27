@@ -1,3 +1,3 @@
-export * from './entity-repository.decorator';
 export * from './inject-knex.decorator';
-export * from './use-repository-interceptors.decorator';
+export * from './knexion-repository.decorator';
+export * from './use-knexion-interceptors.decorator';

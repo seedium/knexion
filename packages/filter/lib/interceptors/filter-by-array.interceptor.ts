@@ -1,9 +1,9 @@
 import { Observable } from 'rxjs';
 import {
   addPrefixColumn,
-  ExecutionContext,
-  RepositoryInterceptor,
-  RepositoryInterceptorNext,
+  KnexionContext,
+  KnexionInterceptor,
+  KnexionCallHandler,
   SelectDatabaseOptions,
 } from '@knexion/core';
 import { FilterOptions } from '../interfaces';
@@ -11,7 +11,7 @@ import { FilterOptions } from '../interfaces';
 type FilterByArrayOperator = 'in' | string;
 
 export class FilterByArrayInterceptor<TRecord, TResult>
-  implements RepositoryInterceptor<TRecord, TResult>
+  implements KnexionInterceptor<TRecord, TResult>
 {
   constructor(
     private readonly name: keyof TRecord,
@@ -21,12 +21,12 @@ export class FilterByArrayInterceptor<TRecord, TResult>
   ) {}
 
   public intercept(
-    context: ExecutionContext<
+    context: KnexionContext<
       TRecord,
       TResult,
       SelectDatabaseOptions<TRecord, TResult>
     >,
-    next: RepositoryInterceptorNext,
+    next: KnexionCallHandler,
   ): Observable<unknown> {
     const { useAlias = true } = this.options;
     const column = useAlias

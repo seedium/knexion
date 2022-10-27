@@ -1,25 +1,25 @@
 import { Observable } from 'rxjs';
 import {
   addPrefixColumn,
-  ExecutionContext,
-  RepositoryInterceptor,
-  RepositoryInterceptorNext,
+  KnexionContext,
+  KnexionInterceptor,
+  KnexionCallHandler,
   SelectDatabaseOptions,
 } from '@knexion/core';
 import { SoftDeleteOptions } from '../interfaces';
 
 export class FilterSoftDeletedInterceptor<TRecord, TResult>
-  implements RepositoryInterceptor<TRecord, TResult>
+  implements KnexionInterceptor<TRecord, TResult>
 {
   constructor(private readonly options: SoftDeleteOptions<TRecord> = {}) {}
 
   public intercept(
-    context: ExecutionContext<
+    context: KnexionContext<
       TRecord,
       TResult,
       SelectDatabaseOptions<TRecord, TResult>
     >,
-    next: RepositoryInterceptorNext,
+    next: KnexionCallHandler,
   ): Observable<unknown> {
     context.queryBuilder.whereNull(
       addPrefixColumn(
