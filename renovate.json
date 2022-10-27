@@ -1,10 +1,18 @@
 {
   "semanticCommits": true,
-  "packageRules": [{
-    "depTypeList": ["devDependencies"],
-    "automerge": true
-  }],
-  "extends": [
-    "config:base"
-  ]
+  "packageRules": [
+    {
+      "matchPackageNames": ["node"],
+      "allowedVersions": "<17"
+    },
+    {
+      "matchPackageNames": ["postgres"],
+      "allowedVersions": "<15"
+    },
+    {
+      "depTypeList": ["devDependencies"],
+      "automerge": true
+    }
+  ],
+  "extends": ["config:base"]
 }
