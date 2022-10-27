@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.2](https://github.com/seedium/knexion/compare/v0.1.0-alpha.1...v0.1.0-alpha.2) (2022-10-27)
+
+
+### Features
+
+* rename interfaces, decorators, etc ([c45548c](https://github.com/seedium/knexion/commit/c45548cc3dceb0068842c62e1fcd9212d56dc0a4))
+
+
+
+
+
 # [0.1.0-alpha.1](https://github.com/seedium/knexion/compare/v0.1.0-alpha.0...v0.1.0-alpha.1) (2022-10-27)
 
 **Note:** Version bump only for package knexion-test-utils
