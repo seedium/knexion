@@ -1,6 +1,6 @@
 {
   "name": "@knexion/soft-delete",
-  "version": "0.1.0-alpha.0",
+  "version": "0.1.0-alpha.1",
   "description": "> TODO: description",
   "author": "Seedium <info@seedium.io>",
   "homepage": "https://github.com/seedium/knexion/tree/main/packages/soft-delete#readme",
