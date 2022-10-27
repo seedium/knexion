@@ -3,7 +3,7 @@ export * from './indicators';
 export * from './interfaces';
 export * from './services';
 export * from './utils';
-export * from './execution-context';
 export * from './interceptors-consumer';
 export * from './knexion.module';
+export * from './knexion-context';
 export * from './repository';

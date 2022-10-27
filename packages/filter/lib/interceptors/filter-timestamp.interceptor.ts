@@ -2,25 +2,25 @@ import { Observable } from 'rxjs';
 import { Knex } from 'knex';
 import {
   addPrefixColumn,
-  ExecutionContext,
-  RepositoryInterceptor,
-  RepositoryInterceptorNext,
+  KnexionContext,
+  KnexionInterceptor,
+  KnexionCallHandler,
   SelectDatabaseOptions,
 } from '@knexion/core';
 import { RangeNumberFilter, TimestampFilter } from '../interfaces';
 
 export class FilterTimestampInterceptor<TRecord, TResult>
-  implements RepositoryInterceptor<TRecord, TResult>
+  implements KnexionInterceptor<TRecord, TResult>
 {
   constructor(private readonly timestampField: keyof TRecord) {}
 
   public intercept(
-    context: ExecutionContext<
+    context: KnexionContext<
       TRecord,
       TResult,
       SelectDatabaseOptions<TRecord, TResult>
     >,
-    next: RepositoryInterceptorNext,
+    next: KnexionCallHandler,
   ): Observable<unknown> {
     if (!context.options[this.timestampField as string]) {
       return next.handle();

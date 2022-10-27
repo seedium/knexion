@@ -1,16 +1,16 @@
 import { Observable } from 'rxjs';
 import {
   addPrefixColumn,
-  ExecutionContext,
-  RepositoryInterceptor,
-  RepositoryInterceptorNext,
+  KnexionContext,
+  KnexionInterceptor,
+  KnexionCallHandler,
   SelectDatabaseOptions,
 } from '@knexion/core';
 import { buildRangeNumberFilter } from '../utils';
 import { FilterOptions, RangeNumberFilter } from '../interfaces';
 
 export class FilterByNumberRangeInterceptor<TRecord, TResult>
-  implements RepositoryInterceptor<TRecord, TResult>
+  implements KnexionInterceptor<TRecord, TResult>
 {
   constructor(
     private readonly name: keyof TRecord,
@@ -18,12 +18,12 @@ export class FilterByNumberRangeInterceptor<TRecord, TResult>
     private readonly options: FilterOptions = {},
   ) {}
   public intercept(
-    context: ExecutionContext<
+    context: KnexionContext<
       TRecord,
       TResult,
       SelectDatabaseOptions<TRecord, TResult>
     >,
-    next: RepositoryInterceptorNext,
+    next: KnexionCallHandler,
   ): Observable<unknown> {
     const { useAlias = true } = this.options;
     const column = useAlias

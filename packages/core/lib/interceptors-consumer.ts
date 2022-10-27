@@ -1,11 +1,11 @@
 import { defer, from, isObservable, lastValueFrom, Observable } from 'rxjs';
 import { mergeAll, switchMap } from 'rxjs/operators';
-import { RepositoryInterceptorNext } from './interfaces';
-import { ExecutionContext } from './execution-context';
+import { KnexionCallHandler } from './interfaces';
+import { KnexionContext } from './knexion-context';
 
 export class InterceptorsConsumer<TRecord> {
   public async intercept(
-    context: ExecutionContext<TRecord>,
+    context: KnexionContext<TRecord>,
     next: () => Promise<unknown>,
   ): Promise<unknown> {
     const { intercept: interceptors = [] } = context.options;
@@ -19,7 +19,7 @@ export class InterceptorsConsumer<TRecord> {
         if (i >= interceptors.length) {
           return start$;
         }
-        const handler: RepositoryInterceptorNext = {
+        const handler: KnexionCallHandler = {
           handle: () => from(nextFn(i + 1)()).pipe(mergeAll()),
         };
         return interceptors[i].intercept(context, handler);

@@ -1,6 +1,6 @@
 import { Test } from '@nestjs/testing';
 import {
-  EntityRepository,
+  KnexionRepository,
   KnexionModule,
   KnexionModuleOptions,
   KnexionOptionsFactory,
@@ -95,7 +95,7 @@ describe('Module', () => {
   });
 
   test('should inject repositories', async () => {
-    @EntityRepository({
+    @KnexionRepository({
       name: 'tests',
     })
     class TestRepository extends Repository<any> {}

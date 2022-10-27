@@ -1,8 +1,8 @@
 import { Observable } from 'rxjs';
 import {
-  ExecutionContext,
-  RepositoryInterceptorNext,
-  RepositoryInterceptor,
+  KnexionContext,
+  KnexionCallHandler,
+  KnexionInterceptor,
   addPrefixColumn,
   SelectDatabaseOptions,
 } from '@knexion/core';
@@ -10,17 +10,17 @@ import { getSortDirection } from '../utils';
 import { SortOptions } from '../interfaces';
 
 export class SortInterceptor<TRecord, TResult>
-  implements RepositoryInterceptor<TRecord, TResult>
+  implements KnexionInterceptor<TRecord, TResult>
 {
   constructor(private readonly options: SortOptions = {}) {}
 
   public intercept(
-    context: ExecutionContext<
+    context: KnexionContext<
       TRecord,
       TResult,
       SelectDatabaseOptions<TRecord, TResult>
     >,
-    next: RepositoryInterceptorNext,
+    next: KnexionCallHandler,
   ): Observable<unknown> {
     const sortOptionKey = this.options.optionKey ?? 'sort';
     const sort = context.options[sortOptionKey];

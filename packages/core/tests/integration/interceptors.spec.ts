@@ -1,10 +1,10 @@
 import {
-  EntityRepository,
-  ExecutionContext,
+  KnexionRepository,
+  KnexionContext,
   Repository,
-  RepositoryInterceptor,
-  RepositoryInterceptorNext,
-  UseRepositoryInterceptors,
+  KnexionInterceptor,
+  KnexionCallHandler,
+  UseKnexionInterceptors,
 } from '../../lib';
 import { faker } from '@faker-js/faker';
 import { Knex } from 'knex';
@@ -53,10 +53,10 @@ describe('Interceptors', () => {
   });
 
   test('should intercept query with additional select', async () => {
-    class TestInterceptor implements RepositoryInterceptor {
+    class TestInterceptor implements KnexionInterceptor {
       public intercept(
-        context: ExecutionContext<any>,
-        next: RepositoryInterceptorNext,
+        context: KnexionContext<any>,
+        next: KnexionCallHandler,
       ): Observable<unknown> {
         context.queryBuilder.select(context.rawBuilder('1 as intercepted'));
         return next.handle();
@@ -70,10 +70,10 @@ describe('Interceptors', () => {
   });
 
   test('should intercept result with additional field', async () => {
-    class TestInterceptor implements RepositoryInterceptor {
+    class TestInterceptor implements KnexionInterceptor {
       public intercept(
-        context: ExecutionContext<any>,
-        next: RepositoryInterceptorNext<any[]>,
+        context: KnexionContext<any>,
+        next: KnexionCallHandler<any[]>,
       ): Observable<any[]> {
         return next
           .handle()
@@ -92,10 +92,10 @@ describe('Interceptors', () => {
   });
 
   test('interceptor should have access to class and handler refs', async () => {
-    class TestInterceptor implements RepositoryInterceptor {
+    class TestInterceptor implements KnexionInterceptor {
       public intercept(
-        context: ExecutionContext<any>,
-        next: RepositoryInterceptorNext,
+        context: KnexionContext<any>,
+        next: KnexionCallHandler,
       ): Observable<unknown> {
         expect(context.getClass()).toBe(TestRepository);
         expect(context.getHandler()).toBe(testRepository.list);
@@ -108,10 +108,10 @@ describe('Interceptors', () => {
   });
 
   describe('reflect interceptors', () => {
-    class TestInterceptor implements RepositoryInterceptor {
+    class TestInterceptor implements KnexionInterceptor {
       public intercept(
-        context: ExecutionContext<any>,
-        next: RepositoryInterceptorNext<any[]>,
+        context: KnexionContext<any>,
+        next: KnexionCallHandler<any[]>,
       ): Observable<any[]> {
         return next.handle().pipe(
           map((result) =>
@@ -125,8 +125,8 @@ describe('Interceptors', () => {
     }
 
     test('interceptor should be applied to repository', async () => {
-      @UseRepositoryInterceptors(TestInterceptor)
-      @EntityRepository({ name: testTableName })
+      @UseKnexionInterceptors(TestInterceptor)
+      @KnexionRepository({ name: testTableName })
       class RepositoryInterceptorRepository extends Repository<any> {}
 
       const repositoryInterceptorRepository =
@@ -143,9 +143,9 @@ describe('Interceptors', () => {
     });
 
     test('interceptor should be applied to method', async () => {
-      @EntityRepository({ name: testTableName })
+      @KnexionRepository({ name: testTableName })
       class MethodInterceptorRepository extends Repository<any> {
-        @UseRepositoryInterceptors(new TestInterceptor())
+        @UseKnexionInterceptors(new TestInterceptor())
         public list(): Promise<any> {
           return super.list();
         }
@@ -164,9 +164,9 @@ describe('Interceptors', () => {
     });
 
     it('should throw error if interceptor type passed to method interceptors', async () => {
-      @EntityRepository({ name: testTableName })
+      @KnexionRepository({ name: testTableName })
       class BrokenMethodInterceptorRepository extends Repository<any> {
-        @UseRepositoryInterceptors(TestInterceptor)
+        @UseKnexionInterceptors(TestInterceptor)
         public list(): Promise<any> {
           return super.list();
         }

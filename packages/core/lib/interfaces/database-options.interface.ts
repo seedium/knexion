@@ -1,13 +1,13 @@
 import { Knex } from 'knex';
-import { RepositoryInterceptors } from './repository-interceptor.interface';
+import { KnexionInterceptors } from './repository-interceptor.interface';
 
-export interface AliasableRepositoryDatabaseOptions {
+export interface AliasableDatabaseOptions {
   alias?: string;
 }
 
 export interface DatabaseOptions<TRecord, TResult, Options = unknown> {
   transaction?: Knex.Transaction;
-  intercept?: RepositoryInterceptors<TRecord, TResult, Options>;
+  intercept?: KnexionInterceptors<TRecord, TResult, Options>;
 }
 
 export interface SelectDatabaseOptions<TRecord, TResult>
@@ -16,6 +16,6 @@ export interface SelectDatabaseOptions<TRecord, TResult>
       TResult,
       SelectDatabaseOptions<TRecord, TResult>
     >,
-    AliasableRepositoryDatabaseOptions {
+    AliasableDatabaseOptions {
   [field: string]: unknown;
 }

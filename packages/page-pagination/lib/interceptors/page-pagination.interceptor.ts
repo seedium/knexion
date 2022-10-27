@@ -1,7 +1,7 @@
 import {
-  ExecutionContext,
-  RepositoryInterceptor,
-  RepositoryInterceptorNext,
+  KnexionContext,
+  KnexionInterceptor,
+  KnexionCallHandler,
 } from '@knexion/core';
 import {
   ListPaginationSelectDatabaseOptions,
@@ -10,17 +10,17 @@ import {
 import { map, Observable } from 'rxjs';
 
 export class PagePaginationInterceptor<TRecord, TResult>
-  implements RepositoryInterceptor<TRecord, TResult>
+  implements KnexionInterceptor<TRecord, TResult>
 {
   constructor(private readonly options?: PagePaginationInterceptorOptions) {}
 
   public intercept(
-    context: ExecutionContext<
+    context: KnexionContext<
       TRecord,
       TResult,
       ListPaginationSelectDatabaseOptions<TRecord, TResult>
     >,
-    next: RepositoryInterceptorNext<TResult[]>,
+    next: KnexionCallHandler<TResult[]>,
   ): Observable<unknown> {
     const { page = 0, limit = this.options?.defaultLimit ?? 20 } =
       context.options;

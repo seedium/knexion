@@ -2,16 +2,16 @@ import { Knex } from 'knex';
 import { ModuleRef, Reflector } from '@nestjs/core';
 import { OnModuleInit, Type } from '@nestjs/common';
 import {
-  REPOSITORY_INTERCEPTORS,
-  REPOSITORY_OPTIONS,
+  KNEXION_INTERCEPTORS,
+  KNEXION_REPOSITORY_OPTIONS,
 } from './knexion.constants';
-import { ExecutionContext } from './execution-context';
+import { KnexionContext } from './knexion-context';
 import { addPrefixColumn } from './utils';
 import {
   DatabaseOptions,
-  EntityRepositoryOptions,
-  RepositoryInterceptor,
-  RepositoryInterceptors,
+  KnexionRepositoryOptions,
+  KnexionInterceptor,
+  KnexionInterceptors,
   SelectDatabaseOptions,
   TakeField,
 } from './interfaces';
@@ -30,8 +30,8 @@ export class Repository<
   Options extends RepositoryOptions = RepositoryOptions,
 > implements OnModuleInit
 {
-  private readonly options: EntityRepositoryOptions;
-  private interceptors: RepositoryInterceptors<TRecord, unknown> = [];
+  private readonly options: KnexionRepositoryOptions;
+  private interceptors: KnexionInterceptors<TRecord, unknown> = [];
   private readonly interceptorsConsumer: InterceptorsConsumer<TRecord>;
 
   constructor(
@@ -40,13 +40,13 @@ export class Repository<
     private readonly reflector: Reflector,
     private readonly moduleRef: ModuleRef,
   ) {
-    const options = this.reflector.get<EntityRepositoryOptions | undefined>(
-      REPOSITORY_OPTIONS,
+    const options = this.reflector.get<KnexionRepositoryOptions | undefined>(
+      KNEXION_REPOSITORY_OPTIONS,
       this.constructor,
     );
     if (!options) {
       throw new Error(
-        'Repository is not initialized with decorators @Repository',
+        'Repository is not initialized with decorators @KnexionRepository',
       );
     }
     this.options = options;
@@ -181,9 +181,9 @@ export class Repository<
   private async resolveInterceptors(): Promise<void> {
     const interceptors =
       this.reflector.get<
-        | RepositoryInterceptors<TRecord, unknown>
-        | Type<RepositoryInterceptor<TRecord, unknown>>[]
-      >(REPOSITORY_INTERCEPTORS, this.constructor) ?? [];
+        | KnexionInterceptors<TRecord, unknown>
+        | Type<KnexionInterceptor<TRecord, unknown>>[]
+      >(KNEXION_INTERCEPTORS, this.constructor) ?? [];
 
     this.interceptors = await Promise.all(
       interceptors.map((inteceptor) => {
@@ -196,8 +196,8 @@ export class Repository<
   }
 
   private async createInterceptor(
-    interceptorType: Type<RepositoryInterceptor<TRecord, unknown>>,
-  ): Promise<RepositoryInterceptor<TRecord, unknown>> {
+    interceptorType: Type<KnexionInterceptor<TRecord, unknown>>,
+  ): Promise<KnexionInterceptor<TRecord, unknown>> {
     return this.moduleRef.create(interceptorType);
   }
 
@@ -209,7 +209,7 @@ export class Repository<
     options?: Options,
     handler?: Function,
   ): Knex.QueryBuilder<TRecord, TResult> {
-    const context = new ExecutionContext(
+    const context = new KnexionContext(
       (trx?: Knex.Transaction) => this.pureQueryBuilder(trx),
       queryBuilder,
       this.rawBuilder(options?.transaction),
@@ -250,7 +250,7 @@ export class Repository<
   >(options?: Options, handler?: Function): Options {
     if (!options) {
       options = {
-        intercept: [] as RepositoryInterceptors<TRecord, TResult>,
+        intercept: [] as KnexionInterceptors<TRecord, TResult>,
       } as Options;
     }
 
@@ -263,9 +263,9 @@ export class Repository<
     if (handler) {
       const methodInterceptors =
         this.reflector.get<
-          | RepositoryInterceptors<TRecord, TResult>
-          | Type<RepositoryInterceptor<TRecord, TResult>>[]
-        >(REPOSITORY_INTERCEPTORS, handler) ?? [];
+          | KnexionInterceptors<TRecord, TResult>
+          | Type<KnexionInterceptor<TRecord, TResult>>[]
+        >(KNEXION_INTERCEPTORS, handler) ?? [];
       /*
        * TODO since moduleRef.create function is very expensive and very slow it's very undesirable to do it in runtime. What options we have:
        *  Option 1. Just ignore type interceptors and throw error like below
@@ -280,7 +280,7 @@ export class Repository<
         );
       }
       options.intercept?.push(
-        ...(methodInterceptors as RepositoryInterceptors<TRecord, TResult>),
+        ...(methodInterceptors as KnexionInterceptors<TRecord, TResult>),
       );
     }
 
