@@ -25,11 +25,7 @@ export class SortInterceptor<TRecord, TResult>
     const sortOptionKey = this.options.optionKey ?? 'sort';
     const sort = context.options[sortOptionKey];
 
-    if (!Array.isArray(sort)) {
-      throw new Error(`'${sortOptionKey}' is not array`);
-    }
-
-    if (sort) {
+    if (sort && Array.isArray(sort)) {
       sort.forEach((property) => {
         const [direction, column] = getSortDirection(property);
         context.queryBuilder.orderBy(

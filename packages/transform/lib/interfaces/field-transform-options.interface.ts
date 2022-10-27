@@ -4,9 +4,9 @@ export type FieldTransformer<TValue = any, TResult = unknown> = (
 
 export type FieldTransformSchema = Record<string, FieldTransformer>;
 
-export interface FieldTransformOptions<TResult> {
+export type ItemTransformer = (data: any) => any;
+
+export interface FieldTransformOptions {
   schema: FieldTransformSchema;
-  resolver?: (
-    data: TResult | TResult[] | null | unknown,
-  ) => TResult | TResult[] | null;
+  transformer?: (transform: ItemTransformer, result: any) => any;
 }

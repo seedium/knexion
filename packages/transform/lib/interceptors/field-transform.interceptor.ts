@@ -22,7 +22,7 @@ export class FieldTransformInterceptor<TRecord, TResult>
     context: ExecutionContext<TRecord, TResult>,
     next: RepositoryInterceptorNext<any>,
   ): Observable<any> {
-    const { schema, resolver } = this.retrieveTransformSchema(context);
+    const { schema, transformer } = this.retrieveTransformSchema(context);
     const schemaEntries = Object.entries<FieldTransformer>(schema);
 
     if (!schemaEntries.length) {
@@ -31,15 +31,11 @@ export class FieldTransformInterceptor<TRecord, TResult>
 
     return next.handle().pipe(
       map((result) => {
-        if (resolver) {
-          const resolvedData = resolver(result);
-          if (!resolvedData) {
-            return null;
-          }
-          if (Array.isArray(resolvedData)) {
-            return this.transformArray(resolvedData, schemaEntries);
-          }
-          return this.transform(resolvedData, schemaEntries);
+        if (transformer) {
+          const transform = (data: any) => {
+            return this.transform(data, schemaEntries);
+          };
+          return transformer(transform, result);
         }
 
         if (!result) {
@@ -71,7 +67,7 @@ export class FieldTransformInterceptor<TRecord, TResult>
 
   private retrieveTransformSchema(
     context: ExecutionContext<TRecord, TResult>,
-  ): FieldTransformOptions<TResult> {
+  ): FieldTransformOptions {
     const handler = context.getHandler();
     if (handler) {
       const handlerSchema = this.reflector.get(FIELD_TRANSFORM_SCHEMA, handler);

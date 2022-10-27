@@ -53,13 +53,13 @@ export class Repository<
     this.interceptorsConsumer = new InterceptorsConsumer();
   }
 
-  public async list<TResult = TRecord[]>(
+  public async list<TResult = TRecord, TOutput = TResult[]>(
     options?: SelectDatabaseOptions<TRecord, TResult>,
-  ): Promise<TResult> {
+  ): Promise<TOutput> {
     options = this.addAliasToOptions(options);
-    return (await this.queryBuilder<TResult>(options, this.list).select(
+    return (await this.queryBuilder(options, this.list).select(
       addPrefixColumn('*', options?.alias),
-    )) as Promise<TResult>;
+    )) as Promise<TOutput>;
   }
 
   public async create(
@@ -69,7 +69,6 @@ export class Repository<
     const [record] = await this.queryBuilder<TRecord>(
       options,
       this.create,
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     ).insert(createPayload as any, '*');
     return record as TRecord;
   }
@@ -79,7 +78,7 @@ export class Repository<
     options?: SelectDatabaseOptions<TRecord, TResult>,
   ): Promise<TResult | null> {
     options = this.addAliasToOptions(options);
-    const record = await this.queryBuilder<TResult>(options, this.retrieve)
+    const record = await this.queryBuilder(options, this.retrieve)
       .select(addPrefixColumn('*', options?.alias))
       .where(addPrefixColumn('id', options?.alias), id)
       .first();
@@ -98,7 +97,6 @@ export class Repository<
   ): Promise<TRecord | null> {
     const [record] = await this.queryBuilder<TRecord>(options, this.update)
       .where('id', id)
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       .update(updatePayload as any, '*');
     if (!record) {
       return null;
@@ -136,13 +134,13 @@ export class Repository<
   public rawBuilder<TResult>(
     trx?: Knex.Transaction,
   ): Knex.RawBuilder<TRecord, TResult>;
-  public rawBuilder<TResult>(trx?: Knex.Transaction): (
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  public rawBuilder<TResult>(
+    trx?: Knex.Transaction,
+  ): (
     valueOrSql: any,
     ...bindings: readonly Knex.RawBinding[]
   ) => Knex.Raw<TResult> {
     return (
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       valueOrSql: any,
       ...bindings: readonly Knex.RawBinding[]
     ): Knex.Raw<TResult> => {
@@ -212,7 +210,7 @@ export class Repository<
     handler?: Function,
   ): Knex.QueryBuilder<TRecord, TResult> {
     const context = new ExecutionContext(
-      () => this.queryBuilder(options, handler),
+      (trx?: Knex.Transaction) => this.pureQueryBuilder(trx),
       queryBuilder,
       this.rawBuilder(options?.transaction),
       this.constructor,
