@@ -1,4 +1,6 @@
 export * from './database-options.interface';
+export * from './knexion-arguments-host.interface';
+export * from './knexion-execution-contex.interface';
 export * from './knexion-module-options.interface';
 export * from './knexion-repository-options.interface';
 export * from './knexion-transaction.interface';

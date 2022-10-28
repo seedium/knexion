@@ -1,7 +1,7 @@
 import { Observable } from 'rxjs';
 import {
   addPrefixColumn,
-  KnexionContext,
+  KnexionExecutionContext,
   KnexionInterceptor,
   KnexionCallHandler,
   SelectDatabaseOptions,
@@ -14,17 +14,18 @@ export class FilterSoftDeletedInterceptor<TRecord, TResult>
   constructor(private readonly options: SoftDeleteOptions<TRecord> = {}) {}
 
   public intercept(
-    context: KnexionContext<
-      TRecord,
-      TResult,
-      SelectDatabaseOptions<TRecord, TResult>
-    >,
+    context: KnexionExecutionContext<TRecord, TResult>,
     next: KnexionCallHandler,
   ): Observable<unknown> {
-    context.queryBuilder.whereNull(
+    const queryBuilder = context.switchToKnex().getQueryBuilder();
+    const options =
+      context
+        .switchToKnex()
+        .getOptions<SelectDatabaseOptions<TRecord, TResult>>() ?? {};
+    queryBuilder.whereNull(
       addPrefixColumn(
         (this.options.field as string) ?? 'deleted_at',
-        context.options.alias,
+        options.alias,
       ),
     );
     return next.handle();

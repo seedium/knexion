@@ -1,5 +1,5 @@
 import {
-  KnexionContext,
+  KnexionExecutionContext,
   KnexionInterceptor,
   KnexionCallHandler,
 } from '@knexion/core';
@@ -15,17 +15,17 @@ export class PagePaginationInterceptor<TRecord, TResult>
   constructor(private readonly options?: PagePaginationInterceptorOptions) {}
 
   public intercept(
-    context: KnexionContext<
-      TRecord,
-      TResult,
-      ListPaginationSelectDatabaseOptions<TRecord, TResult>
-    >,
+    context: KnexionExecutionContext<TRecord, TResult>,
     next: KnexionCallHandler<TResult[]>,
   ): Observable<unknown> {
     const { page = 0, limit = this.options?.defaultLimit ?? 20 } =
-      context.options;
+      context
+        .switchToKnex()
+        .getOptions<ListPaginationSelectDatabaseOptions<TRecord, TResult>>() ??
+      {};
+    const queryBuilder = context.switchToKnex().getQueryBuilder();
     const offset = page * limit;
-    context.queryBuilder.limit(limit).offset(offset);
+    queryBuilder.limit(limit).offset(offset);
 
     if (this.options?.transform ?? true) {
       return next.handle().pipe(

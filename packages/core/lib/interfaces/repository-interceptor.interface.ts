@@ -1,6 +1,5 @@
 import { Observable } from 'rxjs';
-import { KnexionContext } from '../knexion-context';
-import { DatabaseOptions } from './database-options.interface';
+import { KnexionExecutionContext } from './knexion-execution-contex.interface';
 
 export interface KnexionCallHandler<T = unknown> {
   handle(): Observable<T>;
@@ -9,15 +8,11 @@ export interface KnexionCallHandler<T = unknown> {
 export interface KnexionInterceptor<
   TRecord = any,
   TResult = any,
-  Options extends DatabaseOptions<TRecord, TResult> = DatabaseOptions<
-    TRecord,
-    TResult
-  >,
   TInput = unknown,
   TOutput = TInput,
 > {
   intercept(
-    context: KnexionContext<TRecord, TResult, Options>,
+    context: KnexionExecutionContext<TRecord, TResult>,
     next: KnexionCallHandler<TInput>,
   ): Observable<TOutput> | Promise<Observable<TOutput>>;
 }
@@ -25,8 +20,4 @@ export interface KnexionInterceptor<
 export type KnexionInterceptors<
   TRecord = any,
   TResult = any,
-  Options extends DatabaseOptions<TRecord, TResult> = DatabaseOptions<
-    TRecord,
-    TResult
-  >,
-> = KnexionInterceptor<TRecord, TResult, Options>[];
+> = KnexionInterceptor<TRecord, TResult>[];

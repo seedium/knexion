@@ -54,7 +54,7 @@ describe('PagePaginationInterceptor', () => {
 
   test('should apply offset 0 and limit 20', async () => {
     await generateTestRecords(21);
-    const result = await testRepository.list<PageList<TestRecord>>({
+    const result = await testRepository.list<TestRecord, PageList<TestRecord>>({
       intercept: [new PagePaginationInterceptor()],
     });
     expect(result.data.length).toBe(20);
@@ -62,7 +62,7 @@ describe('PagePaginationInterceptor', () => {
 
   test('should use custom default limit 2', async () => {
     await generateTestRecords(3);
-    const result = await testRepository.list<PageList<TestRecord>>({
+    const result = await testRepository.list<TestRecord, PageList<TestRecord>>({
       intercept: [new PagePaginationInterceptor({ defaultLimit: 2 })],
     });
     expect(result.data.length).toBe(2);
@@ -70,7 +70,7 @@ describe('PagePaginationInterceptor', () => {
 
   test('should use custom limit from options', async () => {
     await generateTestRecords(3);
-    const result = await testRepository.list<PageList<TestRecord>>({
+    const result = await testRepository.list<TestRecord, PageList<TestRecord>>({
       intercept: [new PagePaginationInterceptor()],
       limit: 2,
     });
@@ -79,7 +79,7 @@ describe('PagePaginationInterceptor', () => {
 
   test('should apply offset', async () => {
     await generateTestRecords(1);
-    const result = await testRepository.list<PageList<TestRecord>>({
+    const result = await testRepository.list<TestRecord, PageList<TestRecord>>({
       intercept: [new PagePaginationInterceptor()],
       limit: 1,
       page: 1,

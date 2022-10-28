@@ -1,6 +1,6 @@
 import {
   KnexionRepository,
-  KnexionContext,
+  KnexionExecutionContext,
   Repository,
   KnexionInterceptor,
   KnexionCallHandler,
@@ -55,10 +55,12 @@ describe('Interceptors', () => {
   test('should intercept query with additional select', async () => {
     class TestInterceptor implements KnexionInterceptor {
       public intercept(
-        context: KnexionContext<any>,
+        context: KnexionExecutionContext<any>,
         next: KnexionCallHandler,
       ): Observable<unknown> {
-        context.queryBuilder.select(context.rawBuilder('1 as intercepted'));
+        const queryBuilder = context.switchToKnex().getQueryBuilder();
+        const rawBuilder = context.switchToKnex().getRawBuilder();
+        queryBuilder.select(rawBuilder('1 as intercepted'));
         return next.handle();
       }
     }
@@ -72,7 +74,7 @@ describe('Interceptors', () => {
   test('should intercept result with additional field', async () => {
     class TestInterceptor implements KnexionInterceptor {
       public intercept(
-        context: KnexionContext<any>,
+        context: KnexionExecutionContext<any>,
         next: KnexionCallHandler<any[]>,
       ): Observable<any[]> {
         return next
@@ -94,7 +96,7 @@ describe('Interceptors', () => {
   test('interceptor should have access to class and handler refs', async () => {
     class TestInterceptor implements KnexionInterceptor {
       public intercept(
-        context: KnexionContext<any>,
+        context: KnexionExecutionContext<any>,
         next: KnexionCallHandler,
       ): Observable<unknown> {
         expect(context.getClass()).toBe(TestRepository);
@@ -110,7 +112,7 @@ describe('Interceptors', () => {
   describe('reflect interceptors', () => {
     class TestInterceptor implements KnexionInterceptor {
       public intercept(
-        context: KnexionContext<any>,
+        context: KnexionExecutionContext<any>,
         next: KnexionCallHandler<any[]>,
       ): Observable<any[]> {
         return next.handle().pipe(

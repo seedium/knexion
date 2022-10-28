@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs';
 import {
-  KnexionContext,
+  KnexionExecutionContext,
   KnexionCallHandler,
   KnexionInterceptor,
   addPrefixColumn,
@@ -15,21 +15,22 @@ export class SortInterceptor<TRecord, TResult>
   constructor(private readonly options: SortOptions = {}) {}
 
   public intercept(
-    context: KnexionContext<
-      TRecord,
-      TResult,
-      SelectDatabaseOptions<TRecord, TResult>
-    >,
+    context: KnexionExecutionContext<TRecord, TResult>,
     next: KnexionCallHandler,
   ): Observable<unknown> {
+    const queryBuilder = context.switchToKnex().getQueryBuilder();
+    const options = context
+      .switchToKnex()
+      .getOptions<SelectDatabaseOptions<TRecord, TResult>>();
+
     const sortOptionKey = this.options.optionKey ?? 'sort';
-    const sort = context.options[sortOptionKey];
+    const sort = options[sortOptionKey];
 
     if (sort && Array.isArray(sort)) {
       sort.forEach((property) => {
         const [direction, column] = getSortDirection(property);
-        context.queryBuilder.orderBy(
-          addPrefixColumn(column, context.options.alias),
+        queryBuilder.orderBy(
+          addPrefixColumn(column, options.alias),
           direction,
           direction === 'desc' ? 'last' : 'first',
         );
