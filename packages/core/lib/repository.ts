@@ -162,7 +162,7 @@ export class Repository<
       this.constructor as Type,
       handler,
     );
-    context.setMethod(handler.name);
+    context.setMethod(handler?.name);
     return this.augmentQueryBuilder(queryBuilder, context) as Promise<TOutput>;
   }
 
