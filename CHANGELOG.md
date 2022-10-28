@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.4](https://github.com/seedium/knexion/compare/v0.1.0-alpha.3...v0.1.0-alpha.4) (2022-10-28)
+
+
+### Bug Fixes
+
+* **core:** fix retrieving handler name from undefined ([baf918c](https://github.com/seedium/knexion/commit/baf918c3ef21f62e73e178ae7c1d4f6a7936f136))
+
+
+
+
+
 # [0.1.0-alpha.3](https://github.com/seedium/knexion/compare/v0.1.0-alpha.2...v0.1.0-alpha.3) (2022-10-28)
 
 
