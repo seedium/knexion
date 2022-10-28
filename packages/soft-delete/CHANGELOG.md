@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.3](https://github.com/seedium/knexion/compare/v0.1.0-alpha.2...v0.1.0-alpha.3) (2022-10-28)
+
+
+### Features
+
+* add execution context with switching functionality ([f2f0490](https://github.com/seedium/knexion/commit/f2f0490b84ee80458c09490b0038db9b1e165b30))
+
+
+
+
+
 # [0.1.0-alpha.2](https://github.com/seedium/knexion/compare/v0.1.0-alpha.1...v0.1.0-alpha.2) (2022-10-27)
 
 
