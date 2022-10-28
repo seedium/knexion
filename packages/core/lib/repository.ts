@@ -5,7 +5,6 @@ import {
   KNEXION_INTERCEPTORS,
   KNEXION_REPOSITORY_OPTIONS,
 } from './knexion.constants';
-import { KnexionContext } from './knexion-context';
 import { addPrefixColumn } from './utils';
 import {
   DatabaseOptions,
@@ -18,8 +17,9 @@ import {
 import { InjectKnex } from './decorators';
 import { InterceptorsConsumer } from './interceptors-consumer';
 import { isFunction } from './utils/internal';
+import { KnexionExecutionContextHost } from './helpers';
 
-export interface RepositoryOptions {
+export interface DefaultRepositoryOptions {
   idType: string | number;
   omitCreateFields?: string;
   omitUpdateFields?: string;
@@ -27,7 +27,7 @@ export interface RepositoryOptions {
 
 export class Repository<
   TRecord,
-  Options extends RepositoryOptions = RepositoryOptions,
+  RepositoryOptions extends DefaultRepositoryOptions = DefaultRepositoryOptions,
 > implements OnModuleInit
 {
   private readonly options: KnexionRepositoryOptions;
@@ -57,31 +57,44 @@ export class Repository<
     options?: SelectDatabaseOptions<TRecord, TResult>,
   ): Promise<TOutput> {
     options = this.addAliasToOptions(options);
-    return (await this.queryBuilder(options, this.list).select(
-      addPrefixColumn('*', options?.alias),
-    )) as Promise<TOutput>;
+    return await this.createQueryRunner(
+      this.queryBuilder().select(addPrefixColumn('*', options?.alias)),
+      options,
+      [],
+      this.list,
+    );
   }
 
   public async create(
-    createPayload: Omit<TRecord, TakeField<Options, 'omitCreateFields'>>,
+    createPayload: Omit<
+      TRecord,
+      TakeField<RepositoryOptions, 'omitCreateFields'>
+    >,
     options?: DatabaseOptions<TRecord, TRecord>,
   ): Promise<TRecord> {
-    const [record] = await this.queryBuilder<TRecord>(
+    const [record] = (await this.createQueryRunner(
+      this.queryBuilder().insert(createPayload as any, '*'),
       options,
+      [createPayload],
       this.create,
-    ).insert(createPayload as any, '*');
-    return record as TRecord;
+    )) as TRecord[];
+    return record;
   }
 
   public async retrieve<TResult = TRecord>(
-    id: Options['idType'],
+    id: RepositoryOptions['idType'],
     options?: SelectDatabaseOptions<TRecord, TResult>,
   ): Promise<TResult | null> {
     options = this.addAliasToOptions(options);
-    const record = await this.queryBuilder(options, this.retrieve)
-      .select(addPrefixColumn('*', options?.alias))
-      .where(addPrefixColumn('id', options?.alias), id)
-      .first();
+    const record = await this.createQueryRunner(
+      this.queryBuilder()
+        .select(addPrefixColumn('*', options?.alias))
+        .where(addPrefixColumn('id', options?.alias), id)
+        .first(),
+      options,
+      [id],
+      this.retrieve,
+    );
     if (!record) {
       return null;
     }
@@ -89,15 +102,20 @@ export class Repository<
   }
 
   public async update(
-    id: Options['idType'],
+    id: RepositoryOptions['idType'],
     updatePayload: Partial<
-      Omit<TRecord, TakeField<Options, 'omitUpdateFields'>>
+      Omit<TRecord, TakeField<RepositoryOptions, 'omitUpdateFields'>>
     >,
     options?: DatabaseOptions<TRecord, TRecord>,
   ): Promise<TRecord | null> {
-    const [record] = await this.queryBuilder<TRecord>(options, this.update)
-      .where('id', id)
-      .update(updatePayload as any, '*');
+    const [record] = (await this.createQueryRunner(
+      this.queryBuilder()
+        .where('id', id)
+        .update(updatePayload as any, '*'),
+      options,
+      [id, updatePayload],
+      this.update,
+    )) as TRecord[];
     if (!record) {
       return null;
     }
@@ -105,30 +123,57 @@ export class Repository<
   }
 
   public async delete(
-    id: Options['idType'],
+    id: RepositoryOptions['idType'],
     options?: DatabaseOptions<TRecord, TRecord>,
   ): Promise<TRecord | null> {
-    const [record] = await this.queryBuilder<TRecord>(options, this.delete)
-      .where('id', id)
-      .del('*');
+    const [record] = (await this.createQueryRunner(
+      this.queryBuilder<TRecord>().where('id', id).del('*'),
+      options,
+      [id],
+      this.delete,
+    )) as TRecord[];
     if (!record) {
       return null;
     }
     return record as TRecord;
   }
 
-  public queryBuilder<
-    TResult,
-    Options extends DatabaseOptions<TRecord, TResult> = DatabaseOptions<
-      TRecord,
-      TResult
-    >,
-  >(
-    options?: Options,
+  public async createQueryRunner<TResult, TOutput>(
+    queryBuilder: Knex.QueryBuilder<TRecord, TResult>,
+    options?: DatabaseOptions<TRecord, unknown>,
+    args: any[] = [],
     handler?: Function,
+  ): Promise<TOutput> {
+    if (options?.transaction) {
+      queryBuilder.transacting(options.transaction);
+    }
+    const context = new KnexionExecutionContextHost<
+      TRecord,
+      TResult,
+      RepositoryOptions['idType']
+    >(
+      [
+        queryBuilder,
+        this.rawBuilder(options?.transaction),
+        () => this.queryBuilder(options?.transaction),
+        options,
+        ...args,
+      ],
+      this.constructor as Type,
+      handler,
+    );
+    context.setMethod(handler.name);
+    return this.augmentQueryBuilder(queryBuilder, context) as Promise<TOutput>;
+  }
+
+  public queryBuilder<TResult>(
+    trx?: Knex.Transaction,
   ): Knex.QueryBuilder<TRecord, TResult> {
-    const queryBuilder = this.pureQueryBuilder(options?.transaction);
-    return this.augmentQueryBuilder(queryBuilder, options, handler);
+    const queryBuilder = this.knex<TRecord, TResult>(this.options.name);
+    if (trx) {
+      queryBuilder.transacting(trx);
+    }
+    return queryBuilder;
   }
 
   public rawBuilder<TResult>(
@@ -152,16 +197,6 @@ export class Repository<
     };
   }
 
-  public pureQueryBuilder<TResult>(
-    trx?: Knex.Transaction,
-  ): Knex.QueryBuilder<TRecord, TResult> {
-    const queryBuilder = this.knex<TRecord, TResult>(this.options.name);
-    if (trx) {
-      queryBuilder.transacting(trx);
-    }
-    return queryBuilder;
-  }
-
   public addAliasToOptions<TResult>(
     options?: SelectDatabaseOptions<TRecord, TResult>,
   ): SelectDatabaseOptions<TRecord, TResult> {
@@ -175,10 +210,6 @@ export class Repository<
   }
 
   public async onModuleInit(): Promise<void> {
-    await this.resolveInterceptors();
-  }
-
-  private async resolveInterceptors(): Promise<void> {
     const interceptors =
       this.reflector.get<
         | KnexionInterceptors<TRecord, unknown>
@@ -186,38 +217,26 @@ export class Repository<
       >(KNEXION_INTERCEPTORS, this.constructor) ?? [];
 
     this.interceptors = await Promise.all(
-      interceptors.map((inteceptor) => {
-        if (isFunction(inteceptor)) {
-          return this.createInterceptor(inteceptor);
+      interceptors.map((interceptor) => {
+        if (isFunction(interceptor)) {
+          return this.moduleRef.create(interceptor);
         }
-        return inteceptor;
+        return interceptor;
       }),
     );
   }
 
-  private async createInterceptor(
-    interceptorType: Type<KnexionInterceptor<TRecord, unknown>>,
-  ): Promise<KnexionInterceptor<TRecord, unknown>> {
-    return this.moduleRef.create(interceptorType);
-  }
-
-  private augmentQueryBuilder<
-    TResult,
-    Options extends DatabaseOptions<TRecord, TResult>,
-  >(
+  private augmentQueryBuilder<TResult>(
     queryBuilder: Knex.QueryBuilder<TRecord, TResult>,
-    options?: Options,
-    handler?: Function,
+    context: KnexionExecutionContextHost<
+      TRecord,
+      TResult,
+      RepositoryOptions['idType']
+    >,
   ): Knex.QueryBuilder<TRecord, TResult> {
-    const context = new KnexionContext(
-      (trx?: Knex.Transaction) => this.pureQueryBuilder(trx),
-      queryBuilder,
-      this.rawBuilder(options?.transaction),
-      this.constructor,
-      handler,
-      this.resolveOptions(options, handler),
-    );
-
+    const options: DatabaseOptions<TRecord, TResult> | undefined = context
+      .switchToKnex()
+      .getOptions();
     // eslint-disable-next-line @typescript-eslint/no-this-alias
     const repositoryRef = this;
     const originalThen = queryBuilder.then;
@@ -227,6 +246,10 @@ export class Repository<
       const [originalOnResolve, originalOnReject] = arguments;
       try {
         const result = await repositoryRef.interceptorsConsumer.intercept(
+          repositoryRef.resolveInterceptors(
+            options?.intercept,
+            context.getHandler(),
+          ),
           context,
           () =>
             new Promise((resolve, reject) => {
@@ -244,21 +267,15 @@ export class Repository<
     return queryBuilder;
   }
 
-  private resolveOptions<
-    TResult,
-    Options extends DatabaseOptions<TRecord, TResult>,
-  >(options?: Options, handler?: Function): Options {
-    if (!options) {
-      options = {
-        intercept: [] as KnexionInterceptors<TRecord, TResult>,
-      } as Options;
-    }
+  private resolveInterceptors<TResult>(
+    interceptors: KnexionInterceptors<TRecord, TResult> = [],
+    handler?: Function,
+  ): KnexionInterceptors<TRecord, TResult> {
+    const resolvedInterceptors: KnexionInterceptors<TRecord, TResult> = [
+      ...interceptors,
+    ];
 
-    if (!options.intercept) {
-      options.intercept = [];
-    }
-
-    options.intercept?.unshift(...this.interceptors);
+    resolvedInterceptors.unshift(...this.interceptors);
 
     if (handler) {
       const methodInterceptors =
@@ -279,11 +296,11 @@ export class Repository<
           'Passing type of interceptor to bootstrap on nestjs side currently is not supported. Please creare instance on interceptor and pass to interceptors',
         );
       }
-      options.intercept?.push(
+      resolvedInterceptors.push(
         ...(methodInterceptors as KnexionInterceptors<TRecord, TResult>),
       );
     }
 
-    return options;
+    return resolvedInterceptors;
   }
 }

@@ -1,7 +1,7 @@
 import { Observable } from 'rxjs';
 import {
   addPrefixColumn,
-  KnexionContext,
+  KnexionExecutionContext,
   KnexionInterceptor,
   KnexionCallHandler,
   SelectDatabaseOptions,
@@ -21,21 +21,21 @@ export class FilterByArrayInterceptor<TRecord, TResult>
   ) {}
 
   public intercept(
-    context: KnexionContext<
-      TRecord,
-      TResult,
-      SelectDatabaseOptions<TRecord, TResult>
-    >,
+    context: KnexionExecutionContext<TRecord, TResult>,
     next: KnexionCallHandler,
   ): Observable<unknown> {
     const { useAlias = true } = this.options;
+    const queryBuilder = context.switchToKnex().getQueryBuilder();
+    const options = context
+      .switchToKnex()
+      .getOptions<SelectDatabaseOptions<TRecord, TResult>>();
     const column = useAlias
-      ? addPrefixColumn(this.name as string, context.options.alias)
+      ? addPrefixColumn(this.name as string, options.alias)
       : (this.name as string);
     if (this.operator === 'in') {
-      context.queryBuilder.whereIn(column, this.value);
+      queryBuilder.whereIn(column, this.value);
     } else {
-      context.queryBuilder.where(column, this.operator, this.value);
+      queryBuilder.where(column, this.operator, this.value);
     }
     return next.handle();
   }

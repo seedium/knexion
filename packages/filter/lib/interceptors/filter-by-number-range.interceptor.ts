@@ -1,7 +1,7 @@
 import { Observable } from 'rxjs';
 import {
   addPrefixColumn,
-  KnexionContext,
+  KnexionExecutionContext,
   KnexionInterceptor,
   KnexionCallHandler,
   SelectDatabaseOptions,
@@ -18,18 +18,18 @@ export class FilterByNumberRangeInterceptor<TRecord, TResult>
     private readonly options: FilterOptions = {},
   ) {}
   public intercept(
-    context: KnexionContext<
-      TRecord,
-      TResult,
-      SelectDatabaseOptions<TRecord, TResult>
-    >,
+    context: KnexionExecutionContext<TRecord, TResult>,
     next: KnexionCallHandler,
   ): Observable<unknown> {
     const { useAlias = true } = this.options;
+    const options = context
+      .switchToKnex()
+      .getOptions<SelectDatabaseOptions<TRecord, TResult>>();
+    const queryBuilder = context.switchToKnex().getQueryBuilder();
     const column = useAlias
-      ? addPrefixColumn(this.name as string, context.options.alias)
+      ? addPrefixColumn(this.name as string, options.alias)
       : (this.name as string);
-    buildRangeNumberFilter(context.queryBuilder, column, this.value);
+    buildRangeNumberFilter(queryBuilder, column, this.value);
     return next.handle();
   }
 }

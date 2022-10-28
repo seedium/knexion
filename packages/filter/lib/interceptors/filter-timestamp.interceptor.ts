@@ -2,7 +2,7 @@ import { Observable } from 'rxjs';
 import { Knex } from 'knex';
 import {
   addPrefixColumn,
-  KnexionContext,
+  KnexionExecutionContext,
   KnexionInterceptor,
   KnexionCallHandler,
   SelectDatabaseOptions,
@@ -15,28 +15,25 @@ export class FilterTimestampInterceptor<TRecord, TResult>
   constructor(private readonly timestampField: keyof TRecord) {}
 
   public intercept(
-    context: KnexionContext<
-      TRecord,
-      TResult,
-      SelectDatabaseOptions<TRecord, TResult>
-    >,
+    context: KnexionExecutionContext<TRecord, TResult>,
     next: KnexionCallHandler,
   ): Observable<unknown> {
-    if (!context.options[this.timestampField as string]) {
+    const options = context
+      .switchToKnex()
+      .getOptions<SelectDatabaseOptions<TRecord, TResult>>();
+    const queryBuilder = context.switchToKnex().getQueryBuilder();
+
+    if (!options[this.timestampField as string]) {
       return next.handle();
     }
-    const timestampFilter = context.options[this.timestampField as string];
+    const timestampFilter = options[this.timestampField as string];
     if (this.isNumber(timestampFilter)) {
-      context.queryBuilder.where(
-        addPrefixColumn('created_at', context.options.alias),
+      queryBuilder.where(
+        addPrefixColumn('created_at', options.alias),
         timestampFilter,
       );
     } else {
-      this.buildComplexDateFilterQuery(
-        context.queryBuilder,
-        timestampFilter,
-        context.options,
-      );
+      this.buildComplexDateFilterQuery(queryBuilder, timestampFilter, options);
     }
     return next.handle();
   }

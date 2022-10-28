@@ -1,7 +1,7 @@
 import { Observable } from 'rxjs';
 import {
   addPrefixColumn,
-  KnexionContext,
+  KnexionExecutionContext,
   KnexionInterceptor,
   KnexionCallHandler,
   SelectDatabaseOptions,
@@ -15,19 +15,19 @@ export class FilterInterceptor<TRecord, TResult>
   constructor(private readonly options: FilterObjectOptions = {}) {}
 
   public intercept(
-    context: KnexionContext<
-      TRecord,
-      TResult,
-      SelectDatabaseOptions<TRecord, TResult>
-    >,
+    context: KnexionExecutionContext<TRecord, TResult>,
     next: KnexionCallHandler,
   ): Observable<unknown> {
-    const filterObject = context.options[this.options.optionKey ?? 'filter'];
+    const queryBuilder = context.switchToKnex().getQueryBuilder();
+    const options = context
+      .switchToKnex()
+      .getOptions<SelectDatabaseOptions<TRecord, TResult>>();
+    const filterObject = options[this.options.optionKey ?? 'filter'];
     if (isPlainObject(filterObject)) {
-      context.queryBuilder.where(
+      queryBuilder.where(
         this.appendAliasToFilterColumns(
           filterObject as FilterObject<TRecord>,
-          context.options.alias,
+          options.alias,
         ),
       );
     }

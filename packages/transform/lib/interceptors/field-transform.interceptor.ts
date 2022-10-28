@@ -3,7 +3,7 @@ import { map } from 'rxjs/operators';
 import { Reflector } from '@nestjs/core';
 import { Injectable } from '@nestjs/common';
 import {
-  KnexionContext,
+  KnexionExecutionContext,
   KnexionCallHandler,
   KnexionInterceptor,
 } from '@knexion/core';
@@ -19,7 +19,7 @@ export class FieldTransformInterceptor<TRecord, TResult>
   constructor(private readonly reflector: Reflector) {}
 
   public intercept(
-    context: KnexionContext<TRecord, TResult>,
+    context: KnexionExecutionContext<TRecord, TResult>,
     next: KnexionCallHandler<any>,
   ): Observable<any> {
     const { schema, transformer } = this.retrieveTransformSchema(context);
@@ -66,7 +66,7 @@ export class FieldTransformInterceptor<TRecord, TResult>
   }
 
   private retrieveTransformSchema(
-    context: KnexionContext<TRecord, TResult>,
+    context: KnexionExecutionContext<TRecord, TResult>,
   ): FieldTransformOptions {
     const handler = context.getHandler();
     if (handler) {

@@ -1,14 +1,14 @@
 import { defer, from, isObservable, lastValueFrom, Observable } from 'rxjs';
 import { mergeAll, switchMap } from 'rxjs/operators';
-import { KnexionCallHandler } from './interfaces';
-import { KnexionContext } from './knexion-context';
+import { KnexionCallHandler, KnexionInterceptors } from './interfaces';
+import { KnexionExecutionContextHost } from './helpers';
 
 export class InterceptorsConsumer<TRecord> {
-  public async intercept(
-    context: KnexionContext<TRecord>,
+  public async intercept<TResult>(
+    interceptors: KnexionInterceptors,
+    context: KnexionExecutionContextHost<TRecord, TResult>,
     next: () => Promise<unknown>,
   ): Promise<unknown> {
-    const { intercept: interceptors = [] } = context.options;
     if (!interceptors.length) {
       return next();
     }
