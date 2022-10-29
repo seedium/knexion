@@ -22,9 +22,7 @@ export class SortInterceptor<TRecord, TResult>
     const options = context
       .switchToKnex()
       .getOptions<SelectDatabaseOptions<TRecord, TResult>>();
-
-    const sortOptionKey = this.options.optionKey ?? 'sort';
-    const sort = options[sortOptionKey];
+    const sort = options[this.options.optionKey ?? 'sort'];
 
     if (sort && Array.isArray(sort)) {
       sort.forEach((property) => {

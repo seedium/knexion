@@ -12,8 +12,13 @@
       [
         "deps",
         "core",
+        "cursor-pagination",
+        "filter",
+        "knexion-test-utils",
         "page-pagination",
-        "knexion-test-utils"
+        "soft-delete",
+        "sort",
+        "transform"
       ]
     ],
     "type-enum": [
