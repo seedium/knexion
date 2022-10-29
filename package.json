@@ -34,7 +34,7 @@
   "devDependencies": {
     "@commitlint/cli": "17.1.2",
     "@commitlint/config-angular": "17.1.0",
-    "@types/node": "16.18.0",
+    "@types/node": "16.18.2",
     "@typescript-eslint/eslint-plugin": "5.41.0",
     "@typescript-eslint/parser": "5.41.0",
     "concurrently": "7.5.0",
