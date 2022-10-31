@@ -7,7 +7,7 @@ import {
   SelectDatabaseOptions,
 } from '@knexion/core';
 import { FilterObject, FilterObjectOptions } from '../interfaces';
-import { isPlainObject } from '@nestjs/common/utils/shared.utils';
+import { isPlainObject, isUndefined } from '@nestjs/common/utils/shared.utils';
 
 export class FilterInterceptor<TRecord, TResult>
   implements KnexionInterceptor<TRecord, TResult>
@@ -40,11 +40,13 @@ export class FilterInterceptor<TRecord, TResult>
     alias?: string,
   ): Record<string, unknown> {
     return Object.fromEntries(
-      Object.entries(filter).map(([name, value]) => {
-        const { useAlias = true } = this.options;
-        const column = useAlias ? addPrefixColumn(name, alias) : name;
-        return [column, value];
-      }),
+      Object.entries(filter)
+        .filter(([, value]) => !isUndefined(value))
+        .map(([name, value]) => {
+          const { useAlias = true } = this.options;
+          const column = useAlias ? addPrefixColumn(name, alias) : name;
+          return [column, value];
+        }),
     );
   }
 }

@@ -3,7 +3,7 @@ export interface FilterOptions {
 }
 
 export type FilterObject<TRecord> = Partial<
-  Record<keyof TRecord, string | number | null>
+  Record<keyof TRecord, string | number | boolean | null>
 >;
 
 export interface FilterObjectOptions extends FilterOptions {
