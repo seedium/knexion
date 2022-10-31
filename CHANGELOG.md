@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.6](https://github.com/seedium/knexion/compare/v0.1.0-alpha.5...v0.1.0-alpha.6) (2022-10-31)
+
+
+### Bug Fixes
+
+* **filter:** fix filter value and omit undefined filters ([bff1cc0](https://github.com/seedium/knexion/commit/bff1cc0874ad828e32f27d38904134a7675054bd))
+
+
+
+
+
 # [0.1.0-alpha.5](https://github.com/seedium/knexion/compare/v0.1.0-alpha.4...v0.1.0-alpha.5) (2022-10-29)
 
 
