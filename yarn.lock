@@ -1041,7 +1041,7 @@ __metadata:
     reflect-metadata: 0.1.13
     rxjs: 7.5.7
     ts-jest: 29.0.3
-    tslib: 2.4.0
+    tslib: 2.4.1
     typescript: 4.8.4
   peerDependencies:
     "@nestjs/common": ^8.0.0 || ^9.0.0
@@ -1071,7 +1071,7 @@ __metadata:
     reflect-metadata: 0.1.13
     rxjs: 7.5.7
     ts-jest: 29.0.3
-    tslib: 2.4.0
+    tslib: 2.4.1
     typescript: 4.8.4
   peerDependencies:
     "@knexion/core": ^0.0.0
@@ -1101,7 +1101,7 @@ __metadata:
     reflect-metadata: 0.1.13
     rxjs: 7.5.7
     ts-jest: 29.0.3
-    tslib: 2.4.0
+    tslib: 2.4.1
     typescript: 4.8.4
   peerDependencies:
     "@knexion/core": ^0.0.0
@@ -1130,7 +1130,7 @@ __metadata:
     reflect-metadata: 0.1.13
     rxjs: 7.5.7
     ts-jest: 29.0.3
-    tslib: 2.4.0
+    tslib: 2.4.1
     typescript: 4.8.4
   peerDependencies:
     "@knexion/core": ^0.0.0
@@ -1159,7 +1159,7 @@ __metadata:
     reflect-metadata: 0.1.13
     rxjs: 7.5.7
     ts-jest: 29.0.3
-    tslib: 2.4.0
+    tslib: 2.4.1
     typescript: 4.8.4
   peerDependencies:
     "@knexion/core": ^0.0.0
@@ -1188,7 +1188,7 @@ __metadata:
     reflect-metadata: 0.1.13
     rxjs: 7.5.7
     ts-jest: 29.0.3
-    tslib: 2.4.0
+    tslib: 2.4.1
     typescript: 4.8.4
   peerDependencies:
     "@knexion/core": ^0.0.0
@@ -1217,7 +1217,7 @@ __metadata:
     reflect-metadata: 0.1.13
     rxjs: 7.5.7
     ts-jest: 29.0.3
-    tslib: 2.4.0
+    tslib: 2.4.1
     typescript: 4.8.4
   peerDependencies:
     "@knexion/core": ^0.0.0
@@ -6636,7 +6636,7 @@ __metadata:
     knex: 2.3.0
     reflect-metadata: 0.1.13
     rxjs: 7.5.7
-    tslib: 2.4.0
+    tslib: 2.4.1
   peerDependencies:
     "@nestjs/common": ^8.0.0 || ^9.0.0
     "@nestjs/core": ^8.0.0 || ^9.0.0
@@ -6666,7 +6666,7 @@ __metadata:
     nx: 15.0.8
     pg: 8.8.0
     prettier: 2.7.1
-    tslib: 2.4.0
+    tslib: 2.4.1
     typescript: 4.8.4
   languageName: unknown
   linkType: soft
@@ -9502,6 +9502,13 @@ __metadata:
   version: 2.4.0
   resolution: "tslib@npm:2.4.0"
   checksum: 8c4aa6a3c5a754bf76aefc38026134180c053b7bd2f81338cb5e5ebf96fefa0f417bff221592bf801077f5bf990562f6264fecbc42cd3309b33872cb6fc3b113
+  languageName: node
+  linkType: hard
+
+"tslib@npm:2.4.1":
+  version: 2.4.1
+  resolution: "tslib@npm:2.4.1"
+  checksum: 19480d6e0313292bd6505d4efe096a6b31c70e21cf08b5febf4da62e95c265c8f571f7b36fcc3d1a17e068032f59c269fab3459d6cd3ed6949eafecf64315fca
   languageName: node
   linkType: hard
 
