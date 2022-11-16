@@ -15,7 +15,7 @@ import {
   KnexionModuleOptions,
   KnexionOptionsFactory,
 } from './interfaces';
-import { KNEX, KNEX_MODULE_OPTIONS } from './knexion.constants';
+import { KNEX, KNEXION_MODULE_OPTIONS } from './knexion.constants';
 import { handleRetry } from './knexion.utils';
 import { KnexionTransactionService } from './services';
 
@@ -23,8 +23,8 @@ import { KnexionTransactionService } from './services';
 @Module({})
 export class KnexionCoreModule implements OnApplicationShutdown {
   static forRoot(options: KnexionModuleOptions = {}): DynamicModule {
-    const typeOrmModuleOptions = {
-      provide: KNEX_MODULE_OPTIONS,
+    const knexionModuleOptions = {
+      provide: KNEXION_MODULE_OPTIONS,
       useValue: options,
     };
 
@@ -36,7 +36,7 @@ export class KnexionCoreModule implements OnApplicationShutdown {
     return {
       module: KnexionCoreModule,
       providers: [
-        typeOrmModuleOptions,
+        knexionModuleOptions,
         knexProvider,
         KnexionTransactionService,
       ],
@@ -49,7 +49,7 @@ export class KnexionCoreModule implements OnApplicationShutdown {
       provide: KNEX,
       useFactory: (options: KnexionModuleOptions) =>
         this.createKnexProvider(options),
-      inject: [KNEX_MODULE_OPTIONS],
+      inject: [KNEXION_MODULE_OPTIONS],
     };
 
     const asyncProviders = this.createAsyncProviders(options);
@@ -102,7 +102,7 @@ export class KnexionCoreModule implements OnApplicationShutdown {
   ): Provider {
     if (options.useFactory) {
       return {
-        provide: KNEX_MODULE_OPTIONS,
+        provide: KNEXION_MODULE_OPTIONS,
         useFactory: options.useFactory,
         inject: options.inject || [],
       };
@@ -112,14 +112,14 @@ export class KnexionCoreModule implements OnApplicationShutdown {
       (options.useClass || options.useExisting) as Type<KnexionOptionsFactory>,
     ];
     return {
-      provide: KNEX_MODULE_OPTIONS,
+      provide: KNEXION_MODULE_OPTIONS,
       useFactory: async (optionsFactory: KnexionOptionsFactory) =>
         await optionsFactory.createKnexOptions(),
       inject,
     };
   }
 
-  private readonly logger = new Logger('KnexModule');
+  private readonly logger = new Logger('KnexionModule');
 
   constructor(@InjectKnex() private readonly knex: Knex) {}
 

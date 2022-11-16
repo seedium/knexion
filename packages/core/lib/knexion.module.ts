@@ -1,7 +1,7 @@
 import { DynamicModule, Module, Type } from '@nestjs/common';
 import { KnexionModuleAsyncOptions, KnexionModuleOptions } from './interfaces';
 import { KnexionCoreModule } from './knexion-core.module';
-import { createKnexProviders } from './knexion.providers';
+import { createKnexionProviders } from './knexion.providers';
 
 @Module({})
 export class KnexionModule {
@@ -20,7 +20,7 @@ export class KnexionModule {
   }
 
   static forFeature(repositories?: Type[]): DynamicModule {
-    const providers = createKnexProviders(repositories);
+    const providers = createKnexionProviders(repositories);
     return {
       module: KnexionModule,
       providers: providers,

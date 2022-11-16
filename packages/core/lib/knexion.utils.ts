@@ -2,7 +2,7 @@ import { Logger } from '@nestjs/common';
 import { Observable } from 'rxjs';
 import { delay, retryWhen, scan } from 'rxjs/operators';
 
-const logger = new Logger('KnexModule');
+const logger = new Logger('KnexionModule');
 
 export function handleRetry(
   retryAttempts = 9,
