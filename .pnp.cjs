@@ -73,7 +73,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/node", "npm:16.18.3"],\
             ["@typescript-eslint/eslint-plugin", "virtual:1ec1c865b5d7ba2ecf92d124a22b9d540172c41db33c2f7870a91a9853c0ea26211547f03d63d3e1230ebadf01b6bdd64fef05530346ea36488682c2b7b8d3bb#npm:5.42.0"],\
             ["@typescript-eslint/parser", "virtual:1ec1c865b5d7ba2ecf92d124a22b9d540172c41db33c2f7870a91a9853c0ea26211547f03d63d3e1230ebadf01b6bdd64fef05530346ea36488682c2b7b8d3bb#npm:5.42.0"],\
-            ["concurrently", "npm:7.5.0"],\
+            ["concurrently", "npm:7.6.0"],\
             ["conventional-changelog-angular", "npm:5.0.13"],\
             ["eslint", "npm:8.26.0"],\
             ["eslint-config-prettier", "virtual:1ec1c865b5d7ba2ecf92d124a22b9d540172c41db33c2f7870a91a9853c0ea26211547f03d63d3e1230ebadf01b6bdd64fef05530346ea36488682c2b7b8d3bb#npm:8.5.0"],\
@@ -5147,10 +5147,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["concurrently", [\
-        ["npm:7.5.0", {\
-          "packageLocation": "./.yarn/cache/concurrently-npm-7.5.0-3391f9b984-7886e1c855.zip/node_modules/concurrently/",\
+        ["npm:7.6.0", {\
+          "packageLocation": "./.yarn/cache/concurrently-npm-7.6.0-2eabc58c36-f705c9a796.zip/node_modules/concurrently/",\
           "packageDependencies": [\
-            ["concurrently", "npm:7.5.0"],\
+            ["concurrently", "npm:7.6.0"],\
             ["chalk", "npm:4.1.0"],\
             ["date-fns", "npm:2.29.3"],\
             ["lodash", "npm:4.17.21"],\
@@ -8376,7 +8376,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/node", "npm:16.18.3"],\
             ["@typescript-eslint/eslint-plugin", "virtual:1ec1c865b5d7ba2ecf92d124a22b9d540172c41db33c2f7870a91a9853c0ea26211547f03d63d3e1230ebadf01b6bdd64fef05530346ea36488682c2b7b8d3bb#npm:5.42.0"],\
             ["@typescript-eslint/parser", "virtual:1ec1c865b5d7ba2ecf92d124a22b9d540172c41db33c2f7870a91a9853c0ea26211547f03d63d3e1230ebadf01b6bdd64fef05530346ea36488682c2b7b8d3bb#npm:5.42.0"],\
-            ["concurrently", "npm:7.5.0"],\
+            ["concurrently", "npm:7.6.0"],\
             ["conventional-changelog-angular", "npm:5.0.13"],\
             ["eslint", "npm:8.26.0"],\
             ["eslint-config-prettier", "virtual:1ec1c865b5d7ba2ecf92d124a22b9d540172c41db33c2f7870a91a9853c0ea26211547f03d63d3e1230ebadf01b6bdd64fef05530346ea36488682c2b7b8d3bb#npm:8.5.0"],\
