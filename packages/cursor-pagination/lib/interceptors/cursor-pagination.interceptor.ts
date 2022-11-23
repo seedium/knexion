@@ -1,5 +1,6 @@
 import { Knex } from 'knex';
 import {
+  addPrefixColumn,
   DatabaseOptions,
   KnexionCallHandler,
   KnexionExecutionContext,
@@ -32,6 +33,7 @@ export class CursorPaginationInterceptor<
       limit = this.options?.defaultLimit ?? 20,
       page_after,
       page_before,
+      alias,
       ...options
     } = context
       .switchToKnex()
@@ -43,17 +45,23 @@ export class CursorPaginationInterceptor<
     if (page_after) {
       const pageInfo = this.parsePageInfo(page_after);
       queryBuilder.where((builder) =>
-        this.buildCursorQuery(builder, [...sort], pageInfo, true),
+        this.buildCursorQuery(builder, [...sort], pageInfo, alias, true),
       );
-      queryBuilder.orderBy('created_at', 'desc').orderBy('id', 'asc');
+      queryBuilder
+        .orderBy(addPrefixColumn('created_at', alias), 'desc')
+        .orderBy(addPrefixColumn('id', alias), 'asc');
     } else if (page_before) {
       const pageInfo = this.parsePageInfo(page_before);
       queryBuilder.where((builder) =>
-        this.buildCursorQuery(builder, [...sort], pageInfo, false),
+        this.buildCursorQuery(builder, [...sort], pageInfo, alias, false),
       );
-      queryBuilder.orderBy('created_at', 'asc').orderBy('id', 'desc');
+      queryBuilder
+        .orderBy(addPrefixColumn('created_at', alias), 'asc')
+        .orderBy(addPrefixColumn('id', alias), 'desc');
     } else {
-      queryBuilder.orderBy('created_at', 'desc').orderBy('id', 'asc');
+      queryBuilder
+        .orderBy(addPrefixColumn('created_at', alias), 'desc')
+        .orderBy(addPrefixColumn('id', alias), 'asc');
     }
 
     return next.handle().pipe(
@@ -84,16 +92,29 @@ export class CursorPaginationInterceptor<
     builder: Knex.QueryBuilder<TRecord, TResult>,
     sort: string[],
     pageInfo: PageInfo<IdType>,
+    alias: string,
     next?: boolean,
   ): void {
     const sortProperty = sort.shift();
     if (!sortProperty) {
       builder
-        .where('created_at', next ? '<=' : '>=', pageInfo.created_at)
+        .where(
+          addPrefixColumn('created_at', alias),
+          next ? '<=' : '>=',
+          pageInfo.created_at,
+        )
         .andWhere((andWhereBuilder) =>
           andWhereBuilder
-            .where('created_at', next ? '<' : '>', pageInfo.created_at)
-            .orWhere('id', next ? '>' : '<', pageInfo.id),
+            .where(
+              addPrefixColumn('created_at', alias),
+              next ? '<' : '>',
+              pageInfo.created_at,
+            )
+            .orWhere(
+              addPrefixColumn('id', alias),
+              next ? '>' : '<',
+              pageInfo.id,
+            ),
         );
       return;
     }
@@ -102,6 +123,7 @@ export class CursorPaginationInterceptor<
       sort,
       sortProperty,
       pageInfo,
+      alias,
       next,
     );
   }
@@ -111,6 +133,7 @@ export class CursorPaginationInterceptor<
     sort: string[],
     currentSortProperty: string,
     pageInfo: PageInfo<IdType>,
+    alias: string,
     next?: boolean,
   ): void {
     const [dir, column] = getSortDirection(currentSortProperty);
@@ -134,7 +157,7 @@ export class CursorPaginationInterceptor<
         );
       }
       andWereBuilder.orWhere((orWhereBuilder) =>
-        this.buildCursorQuery(orWhereBuilder, sort, pageInfo, next),
+        this.buildCursorQuery(orWhereBuilder, sort, pageInfo, alias, next),
       );
     });
   }
