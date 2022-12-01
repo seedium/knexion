@@ -10,6 +10,8 @@ jobs:
         node-version: [16.x]
     steps:
       - uses: actions/checkout@v3
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
       - name: Format
@@ -22,6 +24,8 @@ jobs:
         node-version: [16.x]
     steps:
       - uses: actions/checkout@v3
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
       - name: Lint source code
@@ -31,14 +35,10 @@ jobs:
 
   lint-commit:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [16.x]
     steps:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
-          configFile: .commitlintrc.json
       - name: Lint commit
         uses: wagoid/commitlint-github-action@v5.2.2
         with:
@@ -53,12 +53,50 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [ 16.x ]
+        node-version: [16.x, 18.x]
     steps:
       - uses: actions/checkout@v3
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
       - name: Install dependencies
         run: yarn install --immutable
       - name: Build
         run: yarn build
+
+  tests:
+    needs:
+      - build
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [16.x, 18.x]
+    services:
+      postgres:
+        image: postgres
+        env:
+          POSTGRES_PASSWORD: example
+          POSTGRES_DB: test_integration
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Install packages
+        run: yarn install --immutable
+      - name: Run tests
+        run: yarn test
+        env:
+          POSTGRES_HOST: localhost
+          POSTGRES_PASSWORD: example
+          POSTGRES_DB: test_integration
+          POSTGRES_PORT: 5432
