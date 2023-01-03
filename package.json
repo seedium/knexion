@@ -41,7 +41,7 @@
     "conventional-changelog-angular": "5.0.13",
     "eslint": "8.26.0",
     "eslint-config-prettier": "8.5.0",
-    "husky": "8.0.1",
+    "husky": "8.0.3",
     "knex": "2.3.0",
     "lerna": "6.0.1",
     "lint-staged": "13.0.3",
