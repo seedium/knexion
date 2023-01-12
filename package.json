@@ -32,8 +32,8 @@
     "release": "yarn lerna version --conventional-commits --create-release github"
   },
   "devDependencies": {
-    "@commitlint/cli": "17.2.0",
-    "@commitlint/config-angular": "17.2.0",
+    "@commitlint/cli": "17.4.2",
+    "@commitlint/config-angular": "17.4.2",
     "@types/node": "16.18.3",
     "@typescript-eslint/eslint-plugin": "5.42.0",
     "@typescript-eslint/parser": "5.42.0",
