@@ -1065,7 +1065,7 @@ __metadata:
     "@types/jest": 29.2.3
     "@types/node": 16.18.3
     jest: 29.3.1
-    knex: 2.3.0
+    knex: 2.4.2
     knexion-test-utils: "workspace:^"
     reflect-metadata: 0.1.13
     rxjs: 7.5.7
@@ -1095,7 +1095,7 @@ __metadata:
     "@types/jest": 29.2.3
     "@types/node": 16.18.3
     jest: 29.3.1
-    knex: 2.3.0
+    knex: 2.4.2
     knexion-test-utils: "workspace:^"
     reflect-metadata: 0.1.13
     rxjs: 7.5.7
@@ -1125,7 +1125,7 @@ __metadata:
     "@types/jest": 29.2.3
     "@types/node": 16.18.3
     jest: 29.3.1
-    knex: 2.3.0
+    knex: 2.4.2
     knexion-test-utils: "workspace:^"
     reflect-metadata: 0.1.13
     rxjs: 7.5.7
@@ -1154,7 +1154,7 @@ __metadata:
     "@types/jest": 29.2.3
     "@types/node": 16.18.3
     jest: 29.3.1
-    knex: 2.3.0
+    knex: 2.4.2
     knexion-test-utils: "workspace:^"
     reflect-metadata: 0.1.13
     rxjs: 7.5.7
@@ -1183,7 +1183,7 @@ __metadata:
     "@types/jest": 29.2.3
     "@types/node": 16.18.3
     jest: 29.3.1
-    knex: 2.3.0
+    knex: 2.4.2
     knexion-test-utils: "workspace:^"
     reflect-metadata: 0.1.13
     rxjs: 7.5.7
@@ -1212,7 +1212,7 @@ __metadata:
     "@types/jest": 29.2.3
     "@types/node": 16.18.3
     jest: 29.3.1
-    knex: 2.3.0
+    knex: 2.4.2
     knexion-test-utils: "workspace:^"
     reflect-metadata: 0.1.13
     rxjs: 7.5.7
@@ -1241,7 +1241,7 @@ __metadata:
     "@types/jest": 29.2.3
     "@types/node": 16.18.3
     jest: 29.3.1
-    knex: 2.3.0
+    knex: 2.4.2
     knexion-test-utils: "workspace:^"
     reflect-metadata: 0.1.13
     rxjs: 7.5.7
@@ -6739,9 +6739,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"knex@npm:2.3.0":
-  version: 2.3.0
-  resolution: "knex@npm:2.3.0"
+"knex@npm:2.4.2":
+  version: 2.4.2
+  resolution: "knex@npm:2.4.2"
   dependencies:
     colorette: 2.0.19
     commander: ^9.1.0
@@ -6774,7 +6774,7 @@ __metadata:
       optional: true
   bin:
     knex: bin/cli.js
-  checksum: ec00da6dd622a386507881e9d8ad44b9c5a4d9f272889b181cafb856fd26d7fdb19ef009cecdbbdedaf7c76f985a8fd14348ae47a0bb77b3dbec15f2c03c0dfe
+  checksum: cfb6436c0e3df3cd1f55d3637e4f222d1acbc7b6ec3757e52c92cbf0a7da4055d40156d707ffede57dc155af75d7f5739a49d1b31d8755bc77bc0e4e2a570748
   languageName: node
   linkType: hard
 
@@ -6786,7 +6786,7 @@ __metadata:
     "@knexion/core": "workspace:^"
     "@nestjs/common": 9.2.1
     "@nestjs/core": 9.2.1
-    knex: 2.3.0
+    knex: 2.4.2
     reflect-metadata: 0.1.13
     rxjs: 7.5.7
     tslib: 2.4.1
@@ -6813,7 +6813,7 @@ __metadata:
     eslint: 8.32.0
     eslint-config-prettier: 8.5.0
     husky: 8.0.3
-    knex: 2.3.0
+    knex: 2.4.2
     lerna: 6.0.1
     lint-staged: 13.1.2
     nx: 15.0.8
