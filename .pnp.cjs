@@ -78,7 +78,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["eslint", "npm:8.32.0"],\
             ["eslint-config-prettier", "virtual:1ec1c865b5d7ba2ecf92d124a22b9d540172c41db33c2f7870a91a9853c0ea26211547f03d63d3e1230ebadf01b6bdd64fef05530346ea36488682c2b7b8d3bb#npm:8.5.0"],\
             ["husky", "npm:8.0.3"],\
-            ["knex", "virtual:1ec1c865b5d7ba2ecf92d124a22b9d540172c41db33c2f7870a91a9853c0ea26211547f03d63d3e1230ebadf01b6bdd64fef05530346ea36488682c2b7b8d3bb#npm:2.3.0"],\
+            ["knex", "virtual:1ec1c865b5d7ba2ecf92d124a22b9d540172c41db33c2f7870a91a9853c0ea26211547f03d63d3e1230ebadf01b6bdd64fef05530346ea36488682c2b7b8d3bb#npm:2.4.2"],\
             ["lerna", "npm:6.0.1"],\
             ["lint-staged", "npm:13.0.3"],\
             ["nx", "virtual:1ec1c865b5d7ba2ecf92d124a22b9d540172c41db33c2f7870a91a9853c0ea26211547f03d63d3e1230ebadf01b6bdd64fef05530346ea36488682c2b7b8d3bb#npm:15.0.8"],\
@@ -1605,7 +1605,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/reflect-metadata", null],\
             ["@types/rxjs", null],\
             ["jest", "virtual:c26d04eaa466cff0d462370274ddb85385b330a8cad28720ac6da81b1fe844da0127444795e52f37f1b2677307d0cb7fb59a428e202f80c4e91069629ab915dc#npm:29.3.1"],\
-            ["knex", "virtual:c26d04eaa466cff0d462370274ddb85385b330a8cad28720ac6da81b1fe844da0127444795e52f37f1b2677307d0cb7fb59a428e202f80c4e91069629ab915dc#npm:2.3.0"],\
+            ["knex", "virtual:c26d04eaa466cff0d462370274ddb85385b330a8cad28720ac6da81b1fe844da0127444795e52f37f1b2677307d0cb7fb59a428e202f80c4e91069629ab915dc#npm:2.4.2"],\
             ["knexion-test-utils", "virtual:c26d04eaa466cff0d462370274ddb85385b330a8cad28720ac6da81b1fe844da0127444795e52f37f1b2677307d0cb7fb59a428e202f80c4e91069629ab915dc#workspace:packages/knexion-test-utils"],\
             ["reflect-metadata", "npm:0.1.13"],\
             ["rxjs", "npm:7.5.7"],\
@@ -1646,7 +1646,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/reflect-metadata", null],\
             ["@types/rxjs", null],\
             ["jest", "virtual:c26d04eaa466cff0d462370274ddb85385b330a8cad28720ac6da81b1fe844da0127444795e52f37f1b2677307d0cb7fb59a428e202f80c4e91069629ab915dc#npm:29.3.1"],\
-            ["knex", "virtual:c26d04eaa466cff0d462370274ddb85385b330a8cad28720ac6da81b1fe844da0127444795e52f37f1b2677307d0cb7fb59a428e202f80c4e91069629ab915dc#npm:2.3.0"],\
+            ["knex", "virtual:c26d04eaa466cff0d462370274ddb85385b330a8cad28720ac6da81b1fe844da0127444795e52f37f1b2677307d0cb7fb59a428e202f80c4e91069629ab915dc#npm:2.4.2"],\
             ["knexion-test-utils", "virtual:9bd444a38bb38b31bf1d65f635e694649f67a73317080f3172aae71349ebd7a496e7c8c611a826a88119ee0961f4b09185526d0e0f20d3f0c23b09863db316a5#workspace:packages/knexion-test-utils"],\
             ["reflect-metadata", "npm:0.1.13"],\
             ["rxjs", "npm:7.5.7"],\
@@ -1681,7 +1681,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/jest", "npm:29.2.3"],\
             ["@types/node", "npm:16.18.3"],\
             ["jest", "virtual:c26d04eaa466cff0d462370274ddb85385b330a8cad28720ac6da81b1fe844da0127444795e52f37f1b2677307d0cb7fb59a428e202f80c4e91069629ab915dc#npm:29.3.1"],\
-            ["knex", "virtual:c26d04eaa466cff0d462370274ddb85385b330a8cad28720ac6da81b1fe844da0127444795e52f37f1b2677307d0cb7fb59a428e202f80c4e91069629ab915dc#npm:2.3.0"],\
+            ["knex", "virtual:c26d04eaa466cff0d462370274ddb85385b330a8cad28720ac6da81b1fe844da0127444795e52f37f1b2677307d0cb7fb59a428e202f80c4e91069629ab915dc#npm:2.4.2"],\
             ["knexion-test-utils", "virtual:c26d04eaa466cff0d462370274ddb85385b330a8cad28720ac6da81b1fe844da0127444795e52f37f1b2677307d0cb7fb59a428e202f80c4e91069629ab915dc#workspace:packages/knexion-test-utils"],\
             ["reflect-metadata", "npm:0.1.13"],\
             ["rxjs", "npm:7.5.7"],\
@@ -1706,7 +1706,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/jest", "npm:29.2.3"],\
             ["@types/node", "npm:16.18.3"],\
             ["jest", "virtual:c26d04eaa466cff0d462370274ddb85385b330a8cad28720ac6da81b1fe844da0127444795e52f37f1b2677307d0cb7fb59a428e202f80c4e91069629ab915dc#npm:29.3.1"],\
-            ["knex", "virtual:c26d04eaa466cff0d462370274ddb85385b330a8cad28720ac6da81b1fe844da0127444795e52f37f1b2677307d0cb7fb59a428e202f80c4e91069629ab915dc#npm:2.3.0"],\
+            ["knex", "virtual:c26d04eaa466cff0d462370274ddb85385b330a8cad28720ac6da81b1fe844da0127444795e52f37f1b2677307d0cb7fb59a428e202f80c4e91069629ab915dc#npm:2.4.2"],\
             ["knexion-test-utils", "virtual:9bd444a38bb38b31bf1d65f635e694649f67a73317080f3172aae71349ebd7a496e7c8c611a826a88119ee0961f4b09185526d0e0f20d3f0c23b09863db316a5#workspace:packages/knexion-test-utils"],\
             ["reflect-metadata", "npm:0.1.13"],\
             ["rxjs", "npm:7.5.7"],\
@@ -1730,7 +1730,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/jest", "npm:29.2.3"],\
             ["@types/node", "npm:16.18.3"],\
             ["jest", "virtual:c26d04eaa466cff0d462370274ddb85385b330a8cad28720ac6da81b1fe844da0127444795e52f37f1b2677307d0cb7fb59a428e202f80c4e91069629ab915dc#npm:29.3.1"],\
-            ["knex", "virtual:c26d04eaa466cff0d462370274ddb85385b330a8cad28720ac6da81b1fe844da0127444795e52f37f1b2677307d0cb7fb59a428e202f80c4e91069629ab915dc#npm:2.3.0"],\
+            ["knex", "virtual:c26d04eaa466cff0d462370274ddb85385b330a8cad28720ac6da81b1fe844da0127444795e52f37f1b2677307d0cb7fb59a428e202f80c4e91069629ab915dc#npm:2.4.2"],\
             ["knexion-test-utils", "virtual:9bd444a38bb38b31bf1d65f635e694649f67a73317080f3172aae71349ebd7a496e7c8c611a826a88119ee0961f4b09185526d0e0f20d3f0c23b09863db316a5#workspace:packages/knexion-test-utils"],\
             ["reflect-metadata", "npm:0.1.13"],\
             ["rxjs", "npm:7.5.7"],\
@@ -1754,7 +1754,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/jest", "npm:29.2.3"],\
             ["@types/node", "npm:16.18.3"],\
             ["jest", "virtual:c26d04eaa466cff0d462370274ddb85385b330a8cad28720ac6da81b1fe844da0127444795e52f37f1b2677307d0cb7fb59a428e202f80c4e91069629ab915dc#npm:29.3.1"],\
-            ["knex", "virtual:c26d04eaa466cff0d462370274ddb85385b330a8cad28720ac6da81b1fe844da0127444795e52f37f1b2677307d0cb7fb59a428e202f80c4e91069629ab915dc#npm:2.3.0"],\
+            ["knex", "virtual:c26d04eaa466cff0d462370274ddb85385b330a8cad28720ac6da81b1fe844da0127444795e52f37f1b2677307d0cb7fb59a428e202f80c4e91069629ab915dc#npm:2.4.2"],\
             ["knexion-test-utils", "virtual:9bd444a38bb38b31bf1d65f635e694649f67a73317080f3172aae71349ebd7a496e7c8c611a826a88119ee0961f4b09185526d0e0f20d3f0c23b09863db316a5#workspace:packages/knexion-test-utils"],\
             ["reflect-metadata", "npm:0.1.13"],\
             ["rxjs", "npm:7.5.7"],\
@@ -1778,7 +1778,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/jest", "npm:29.2.3"],\
             ["@types/node", "npm:16.18.3"],\
             ["jest", "virtual:c26d04eaa466cff0d462370274ddb85385b330a8cad28720ac6da81b1fe844da0127444795e52f37f1b2677307d0cb7fb59a428e202f80c4e91069629ab915dc#npm:29.3.1"],\
-            ["knex", "virtual:c26d04eaa466cff0d462370274ddb85385b330a8cad28720ac6da81b1fe844da0127444795e52f37f1b2677307d0cb7fb59a428e202f80c4e91069629ab915dc#npm:2.3.0"],\
+            ["knex", "virtual:c26d04eaa466cff0d462370274ddb85385b330a8cad28720ac6da81b1fe844da0127444795e52f37f1b2677307d0cb7fb59a428e202f80c4e91069629ab915dc#npm:2.4.2"],\
             ["knexion-test-utils", "virtual:9bd444a38bb38b31bf1d65f635e694649f67a73317080f3172aae71349ebd7a496e7c8c611a826a88119ee0961f4b09185526d0e0f20d3f0c23b09863db316a5#workspace:packages/knexion-test-utils"],\
             ["reflect-metadata", "npm:0.1.13"],\
             ["rxjs", "npm:7.5.7"],\
@@ -1808,7 +1808,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/reflect-metadata", null],\
             ["@types/rxjs", null],\
             ["jest", "virtual:c26d04eaa466cff0d462370274ddb85385b330a8cad28720ac6da81b1fe844da0127444795e52f37f1b2677307d0cb7fb59a428e202f80c4e91069629ab915dc#npm:29.3.1"],\
-            ["knex", "virtual:c26d04eaa466cff0d462370274ddb85385b330a8cad28720ac6da81b1fe844da0127444795e52f37f1b2677307d0cb7fb59a428e202f80c4e91069629ab915dc#npm:2.3.0"],\
+            ["knex", "virtual:c26d04eaa466cff0d462370274ddb85385b330a8cad28720ac6da81b1fe844da0127444795e52f37f1b2677307d0cb7fb59a428e202f80c4e91069629ab915dc#npm:2.4.2"],\
             ["knexion-test-utils", "virtual:9bd444a38bb38b31bf1d65f635e694649f67a73317080f3172aae71349ebd7a496e7c8c611a826a88119ee0961f4b09185526d0e0f20d3f0c23b09863db316a5#workspace:packages/knexion-test-utils"],\
             ["reflect-metadata", "npm:0.1.13"],\
             ["rxjs", "npm:7.5.7"],\
@@ -1844,7 +1844,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/jest", "npm:29.2.3"],\
             ["@types/node", "npm:16.18.3"],\
             ["jest", "virtual:c26d04eaa466cff0d462370274ddb85385b330a8cad28720ac6da81b1fe844da0127444795e52f37f1b2677307d0cb7fb59a428e202f80c4e91069629ab915dc#npm:29.3.1"],\
-            ["knex", "virtual:c26d04eaa466cff0d462370274ddb85385b330a8cad28720ac6da81b1fe844da0127444795e52f37f1b2677307d0cb7fb59a428e202f80c4e91069629ab915dc#npm:2.3.0"],\
+            ["knex", "virtual:c26d04eaa466cff0d462370274ddb85385b330a8cad28720ac6da81b1fe844da0127444795e52f37f1b2677307d0cb7fb59a428e202f80c4e91069629ab915dc#npm:2.4.2"],\
             ["knexion-test-utils", "virtual:9bd444a38bb38b31bf1d65f635e694649f67a73317080f3172aae71349ebd7a496e7c8c611a826a88119ee0961f4b09185526d0e0f20d3f0c23b09863db316a5#workspace:packages/knexion-test-utils"],\
             ["reflect-metadata", "npm:0.1.13"],\
             ["rxjs", "npm:7.5.7"],\
@@ -1868,7 +1868,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/jest", "npm:29.2.3"],\
             ["@types/node", "npm:16.18.3"],\
             ["jest", "virtual:c26d04eaa466cff0d462370274ddb85385b330a8cad28720ac6da81b1fe844da0127444795e52f37f1b2677307d0cb7fb59a428e202f80c4e91069629ab915dc#npm:29.3.1"],\
-            ["knex", "virtual:c26d04eaa466cff0d462370274ddb85385b330a8cad28720ac6da81b1fe844da0127444795e52f37f1b2677307d0cb7fb59a428e202f80c4e91069629ab915dc#npm:2.3.0"],\
+            ["knex", "virtual:c26d04eaa466cff0d462370274ddb85385b330a8cad28720ac6da81b1fe844da0127444795e52f37f1b2677307d0cb7fb59a428e202f80c4e91069629ab915dc#npm:2.4.2"],\
             ["knexion-test-utils", "virtual:9bd444a38bb38b31bf1d65f635e694649f67a73317080f3172aae71349ebd7a496e7c8c611a826a88119ee0961f4b09185526d0e0f20d3f0c23b09863db316a5#workspace:packages/knexion-test-utils"],\
             ["reflect-metadata", "npm:0.1.13"],\
             ["rxjs", "npm:7.5.7"],\
@@ -8304,17 +8304,17 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["knex", [\
-        ["npm:2.3.0", {\
-          "packageLocation": "./.yarn/cache/knex-npm-2.3.0-dcb9d9ebc2-ec00da6dd6.zip/node_modules/knex/",\
+        ["npm:2.4.2", {\
+          "packageLocation": "./.yarn/cache/knex-npm-2.4.2-a7caf35691-cfb6436c0e.zip/node_modules/knex/",\
           "packageDependencies": [\
-            ["knex", "npm:2.3.0"]\
+            ["knex", "npm:2.4.2"]\
           ],\
           "linkType": "SOFT"\
         }],\
-        ["virtual:1ec1c865b5d7ba2ecf92d124a22b9d540172c41db33c2f7870a91a9853c0ea26211547f03d63d3e1230ebadf01b6bdd64fef05530346ea36488682c2b7b8d3bb#npm:2.3.0", {\
-          "packageLocation": "./.yarn/__virtual__/knex-virtual-d13ae9dc21/0/cache/knex-npm-2.3.0-dcb9d9ebc2-ec00da6dd6.zip/node_modules/knex/",\
+        ["virtual:1ec1c865b5d7ba2ecf92d124a22b9d540172c41db33c2f7870a91a9853c0ea26211547f03d63d3e1230ebadf01b6bdd64fef05530346ea36488682c2b7b8d3bb#npm:2.4.2", {\
+          "packageLocation": "./.yarn/__virtual__/knex-virtual-9c99277f89/0/cache/knex-npm-2.4.2-a7caf35691-cfb6436c0e.zip/node_modules/knex/",\
           "packageDependencies": [\
-            ["knex", "virtual:1ec1c865b5d7ba2ecf92d124a22b9d540172c41db33c2f7870a91a9853c0ea26211547f03d63d3e1230ebadf01b6bdd64fef05530346ea36488682c2b7b8d3bb#npm:2.3.0"],\
+            ["knex", "virtual:1ec1c865b5d7ba2ecf92d124a22b9d540172c41db33c2f7870a91a9853c0ea26211547f03d63d3e1230ebadf01b6bdd64fef05530346ea36488682c2b7b8d3bb#npm:2.4.2"],\
             ["@types/better-sqlite3", null],\
             ["@types/mysql", null],\
             ["@types/mysql2", null],\
@@ -8362,10 +8362,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           ],\
           "linkType": "HARD"\
         }],\
-        ["virtual:c26d04eaa466cff0d462370274ddb85385b330a8cad28720ac6da81b1fe844da0127444795e52f37f1b2677307d0cb7fb59a428e202f80c4e91069629ab915dc#npm:2.3.0", {\
-          "packageLocation": "./.yarn/__virtual__/knex-virtual-fa33ee04fb/0/cache/knex-npm-2.3.0-dcb9d9ebc2-ec00da6dd6.zip/node_modules/knex/",\
+        ["virtual:c26d04eaa466cff0d462370274ddb85385b330a8cad28720ac6da81b1fe844da0127444795e52f37f1b2677307d0cb7fb59a428e202f80c4e91069629ab915dc#npm:2.4.2", {\
+          "packageLocation": "./.yarn/__virtual__/knex-virtual-bd67372256/0/cache/knex-npm-2.4.2-a7caf35691-cfb6436c0e.zip/node_modules/knex/",\
           "packageDependencies": [\
-            ["knex", "virtual:c26d04eaa466cff0d462370274ddb85385b330a8cad28720ac6da81b1fe844da0127444795e52f37f1b2677307d0cb7fb59a428e202f80c4e91069629ab915dc#npm:2.3.0"],\
+            ["knex", "virtual:c26d04eaa466cff0d462370274ddb85385b330a8cad28720ac6da81b1fe844da0127444795e52f37f1b2677307d0cb7fb59a428e202f80c4e91069629ab915dc#npm:2.4.2"],\
             ["@types/better-sqlite3", null],\
             ["@types/mysql", null],\
             ["@types/mysql2", null],\
@@ -8429,7 +8429,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["eslint", "npm:8.32.0"],\
             ["eslint-config-prettier", "virtual:1ec1c865b5d7ba2ecf92d124a22b9d540172c41db33c2f7870a91a9853c0ea26211547f03d63d3e1230ebadf01b6bdd64fef05530346ea36488682c2b7b8d3bb#npm:8.5.0"],\
             ["husky", "npm:8.0.3"],\
-            ["knex", "virtual:1ec1c865b5d7ba2ecf92d124a22b9d540172c41db33c2f7870a91a9853c0ea26211547f03d63d3e1230ebadf01b6bdd64fef05530346ea36488682c2b7b8d3bb#npm:2.3.0"],\
+            ["knex", "virtual:1ec1c865b5d7ba2ecf92d124a22b9d540172c41db33c2f7870a91a9853c0ea26211547f03d63d3e1230ebadf01b6bdd64fef05530346ea36488682c2b7b8d3bb#npm:2.4.2"],\
             ["lerna", "npm:6.0.1"],\
             ["lint-staged", "npm:13.0.3"],\
             ["nx", "virtual:1ec1c865b5d7ba2ecf92d124a22b9d540172c41db33c2f7870a91a9853c0ea26211547f03d63d3e1230ebadf01b6bdd64fef05530346ea36488682c2b7b8d3bb#npm:15.0.8"],\
@@ -8455,7 +8455,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/nestjs__core", null],\
             ["@types/reflect-metadata", null],\
             ["@types/rxjs", null],\
-            ["knex", "virtual:c26d04eaa466cff0d462370274ddb85385b330a8cad28720ac6da81b1fe844da0127444795e52f37f1b2677307d0cb7fb59a428e202f80c4e91069629ab915dc#npm:2.3.0"],\
+            ["knex", "virtual:c26d04eaa466cff0d462370274ddb85385b330a8cad28720ac6da81b1fe844da0127444795e52f37f1b2677307d0cb7fb59a428e202f80c4e91069629ab915dc#npm:2.4.2"],\
             ["reflect-metadata", "npm:0.1.13"],\
             ["rxjs", "npm:7.5.7"],\
             ["tslib", "npm:2.4.1"]\
@@ -8487,7 +8487,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/nestjs__core", null],\
             ["@types/reflect-metadata", null],\
             ["@types/rxjs", null],\
-            ["knex", "virtual:c26d04eaa466cff0d462370274ddb85385b330a8cad28720ac6da81b1fe844da0127444795e52f37f1b2677307d0cb7fb59a428e202f80c4e91069629ab915dc#npm:2.3.0"],\
+            ["knex", "virtual:c26d04eaa466cff0d462370274ddb85385b330a8cad28720ac6da81b1fe844da0127444795e52f37f1b2677307d0cb7fb59a428e202f80c4e91069629ab915dc#npm:2.4.2"],\
             ["reflect-metadata", "npm:0.1.13"],\
             ["rxjs", "npm:7.5.7"],\
             ["tslib", "npm:2.4.1"]\
@@ -8514,7 +8514,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@knexion/core", "virtual:9a9781ba6366f1eef1f192004c88fb8cccb82c5fcc7fa81b2af98b9fdb4318c8755b2b1ab492482bd3c231a462d49f33b5fb6ce79d8f5c55de06e00c2f43481f#workspace:packages/core"],\
             ["@nestjs/common", "virtual:c26d04eaa466cff0d462370274ddb85385b330a8cad28720ac6da81b1fe844da0127444795e52f37f1b2677307d0cb7fb59a428e202f80c4e91069629ab915dc#npm:9.2.1"],\
             ["@nestjs/core", "virtual:c26d04eaa466cff0d462370274ddb85385b330a8cad28720ac6da81b1fe844da0127444795e52f37f1b2677307d0cb7fb59a428e202f80c4e91069629ab915dc#npm:9.2.1"],\
-            ["knex", "virtual:c26d04eaa466cff0d462370274ddb85385b330a8cad28720ac6da81b1fe844da0127444795e52f37f1b2677307d0cb7fb59a428e202f80c4e91069629ab915dc#npm:2.3.0"],\
+            ["knex", "virtual:c26d04eaa466cff0d462370274ddb85385b330a8cad28720ac6da81b1fe844da0127444795e52f37f1b2677307d0cb7fb59a428e202f80c4e91069629ab915dc#npm:2.4.2"],\
             ["reflect-metadata", "npm:0.1.13"],\
             ["rxjs", "npm:7.5.7"],\
             ["tslib", "npm:2.4.1"]\
