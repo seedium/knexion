@@ -1,7 +1,7 @@
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
-  name: knexion/cursor-pagination
+  name: knexion-cursor-pagination
   description: Plugin implements cursor pagination
   tags:
     - postgres
@@ -13,4 +13,4 @@ spec:
   owner: user:default/k.zgara
   subcomponentOf: knexion
   dependsOn:
-    - knexion/core
+    - knexion-core
