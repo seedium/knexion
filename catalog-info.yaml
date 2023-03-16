@@ -10,7 +10,7 @@ metadata:
   links:
     - url: https://github.com/seedium/knexion
       title: Knexion
-      icon: 'kind:component'
+      icon: github
 spec:
   type: library
   lifecycle: experimental
