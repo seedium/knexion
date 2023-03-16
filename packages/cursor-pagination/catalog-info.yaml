@@ -1,0 +1,12 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: '@knexion/cursor-pagination'
+  description: Plugin implements cursor pagination
+spec:
+  type: library
+  lifecycle: experimental
+  owner: user:default/k.zgara
+  subcomponentOf: knexion
+  dependsOn:
+    - '@knexion/core'

@@ -1,0 +1,10 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: knexion
+  description: The lib to handle database queries
+spec:
+  type: library
+  lifecycle: experimental
+  owner: user:default/k.zgara
+

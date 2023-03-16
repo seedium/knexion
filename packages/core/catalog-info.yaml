@@ -1,0 +1,10 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: '@knexion/core'
+  description: The core lib of knexion
+spec:
+  type: library
+  lifecycle: experimental
+  owner: user:default/k.zgara
+  subcomponentOf: knexion
