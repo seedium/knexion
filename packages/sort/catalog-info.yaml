@@ -1,12 +1,16 @@
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
-  name: knexion-cursor-pagination
+  name: knexion-sort
   description: Plugin implements sorting
   tags:
     - postgres
     - database
     - nestjs
+  links:
+    - url: https://github.com/seedium/knexion/tree/main/packages/sort
+      title: Repository
+      icon: github
 spec:
   type: library
   lifecycle: experimental

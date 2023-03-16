@@ -7,6 +7,10 @@ metadata:
     - postgres
     - database
     - nestjs
+  links:
+    - url: https://github.com/seedium/knexion/tree/main/packages/page-pagination
+      title: Repository
+      icon: github
 spec:
   type: library
   lifecycle: experimental

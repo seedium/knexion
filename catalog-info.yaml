@@ -9,7 +9,7 @@ metadata:
     - nestjs
   links:
     - url: https://github.com/seedium/knexion
-      title: Knexion
+      title: Repository
       icon: github
 spec:
   type: library
