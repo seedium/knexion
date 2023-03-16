@@ -1,17 +1,16 @@
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
-  name: knexion
-  description: The lib to handle database queries
+  name: knexion-soft-delete
+  description: Plugin implements soft deletion
   tags:
     - postgres
     - database
     - nestjs
-  links:
-    - url: https://github.com/seedium/knexion
-      title: Knexion
-      icon: 'kind:component'
 spec:
   type: library
   lifecycle: experimental
   owner: user:default/k.zgara
+  subcomponentOf: knexion
+  dependsOn:
+    - component:knexion-core
