@@ -3,8 +3,11 @@ kind: Component
 metadata:
   name: knexion
   description: The lib to handle database queries
+  tags:
+    - postgres
+    - database
+    - nestjs
 spec:
   type: library
   lifecycle: experimental
   owner: user:default/k.zgara
-

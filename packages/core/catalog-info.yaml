@@ -1,8 +1,12 @@
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
-  name: '@knexion/core'
+  name: knexion/core
   description: The core lib of knexion
+  tags:
+    - postgres
+    - database
+    - nestjs
 spec:
   type: library
   lifecycle: experimental
