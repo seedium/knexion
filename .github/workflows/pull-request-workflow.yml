@@ -40,7 +40,7 @@ jobs:
           fetch-depth: 0
           configFile: .commitlintrc.json
       - name: Lint commit
-        uses: wagoid/commitlint-github-action@v5.2.2
+        uses: wagoid/commitlint-github-action@v5.3.1
         with:
           configFile: ./.commitlintrc.json
           failOnWarnings: true
