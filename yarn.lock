@@ -1086,7 +1086,7 @@ __metadata:
     reflect-metadata: 0.1.13
     rxjs: 7.5.7
     ts-jest: 29.0.5
-    tslib: 2.4.1
+    tslib: 2.5.0
     typescript: 4.8.4
   peerDependencies:
     "@nestjs/common": ^8.0.0 || ^9.0.0
@@ -1116,7 +1116,7 @@ __metadata:
     reflect-metadata: 0.1.13
     rxjs: 7.5.7
     ts-jest: 29.0.5
-    tslib: 2.4.1
+    tslib: 2.5.0
     typescript: 4.8.4
   peerDependencies:
     "@knexion/core": ^0.0.0
@@ -1146,7 +1146,7 @@ __metadata:
     reflect-metadata: 0.1.13
     rxjs: 7.5.7
     ts-jest: 29.0.5
-    tslib: 2.4.1
+    tslib: 2.5.0
     typescript: 4.8.4
   peerDependencies:
     "@knexion/core": ^0.0.0
@@ -1175,7 +1175,7 @@ __metadata:
     reflect-metadata: 0.1.13
     rxjs: 7.5.7
     ts-jest: 29.0.5
-    tslib: 2.4.1
+    tslib: 2.5.0
     typescript: 4.8.4
   peerDependencies:
     "@knexion/core": ^0.0.0
@@ -1204,7 +1204,7 @@ __metadata:
     reflect-metadata: 0.1.13
     rxjs: 7.5.7
     ts-jest: 29.0.5
-    tslib: 2.4.1
+    tslib: 2.5.0
     typescript: 4.8.4
   peerDependencies:
     "@knexion/core": ^0.0.0
@@ -1233,7 +1233,7 @@ __metadata:
     reflect-metadata: 0.1.13
     rxjs: 7.5.7
     ts-jest: 29.0.5
-    tslib: 2.4.1
+    tslib: 2.5.0
     typescript: 4.8.4
   peerDependencies:
     "@knexion/core": ^0.0.0
@@ -1262,7 +1262,7 @@ __metadata:
     reflect-metadata: 0.1.13
     rxjs: 7.5.7
     ts-jest: 29.0.5
-    tslib: 2.4.1
+    tslib: 2.5.0
     typescript: 4.8.4
   peerDependencies:
     "@knexion/core": ^0.0.0
@@ -6908,7 +6908,7 @@ __metadata:
     knex: 2.4.2
     reflect-metadata: 0.1.13
     rxjs: 7.5.7
-    tslib: 2.4.1
+    tslib: 2.5.0
   peerDependencies:
     "@nestjs/common": ^8.0.0 || ^9.0.0
     "@nestjs/core": ^8.0.0 || ^9.0.0
@@ -6938,7 +6938,7 @@ __metadata:
     nx: 15.8.5
     pg: 8.9.0
     prettier: 2.8.4
-    tslib: 2.4.1
+    tslib: 2.5.0
     typescript: 4.8.4
   languageName: unknown
   linkType: soft
