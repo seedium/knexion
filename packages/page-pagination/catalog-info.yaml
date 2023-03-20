@@ -3,6 +3,8 @@ kind: Component
 metadata:
   name: knexion-page-pagination
   description: Plugin implements page pagination
+  annotations:
+    backstage.io/techdocs-ref: dir:../..
   tags:
     - postgres
     - database

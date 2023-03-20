@@ -3,6 +3,8 @@ kind: Component
 metadata:
   name: knexion-sort
   description: Plugin implements sorting
+  annotations:
+    backstage.io/techdocs-ref: dir:../..
   tags:
     - postgres
     - database

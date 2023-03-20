@@ -3,6 +3,8 @@ kind: Component
 metadata:
   name: knexion-transform
   description: Plugin implements result transformation
+  annotations:
+    backstage.io/techdocs-ref: dir:../..
   tags:
     - postgres
     - database
