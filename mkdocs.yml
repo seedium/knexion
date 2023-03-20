@@ -1,0 +1,8 @@
+site_name: 'Knexion'
+
+nav:
+  - Introduction: index.md
+  - Getting Started: getting_started.md
+
+plugins:
+  - techdocs-core

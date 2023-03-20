@@ -3,6 +3,8 @@ kind: Component
 metadata:
   name: knexion
   description: The lib to handle database queries
+  annotations:
+    backstage.io/techdocs-ref: dir:.
   tags:
     - postgres
     - database
