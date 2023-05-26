@@ -29,7 +29,7 @@ export class FilterTimestampInterceptor<TRecord, TResult>
     const timestampFilter = options[this.timestampField as string];
     if (this.isNumber(timestampFilter)) {
       queryBuilder.where(
-        addPrefixColumn('created_at', options.alias),
+        addPrefixColumn(this.timestampField as string, options.alias),
         timestampFilter,
       );
     } else {
@@ -63,15 +63,18 @@ export class FilterTimestampInterceptor<TRecord, TResult>
     value: number,
     alias?: string,
   ): void {
-    const createdAtColumnName = addPrefixColumn('created_at', alias);
+    const timestampColumnName = addPrefixColumn(
+      this.timestampField as string,
+      alias,
+    );
     if (operator === 'gt') {
-      queryBuilder.where(createdAtColumnName, '>', value);
+      queryBuilder.where(timestampColumnName, '>', value);
     } else if (operator === 'gte') {
-      queryBuilder.where(createdAtColumnName, '>=', value);
+      queryBuilder.where(timestampColumnName, '>=', value);
     } else if (operator === 'lt') {
-      queryBuilder.where(createdAtColumnName, '<', value);
+      queryBuilder.where(timestampColumnName, '<', value);
     } else if (operator === 'lte') {
-      queryBuilder.where(createdAtColumnName, '<=', value);
+      queryBuilder.where(timestampColumnName, '<=', value);
     }
   }
 }
