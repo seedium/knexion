@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.10](https://github.com/seedium/knexion/compare/v0.1.0-alpha.9...v0.1.0-alpha.10) (2023-05-26)
+
+
+### Bug Fixes
+
+* **deps:** update dependency tslib to v2.5.0 ([1069df4](https://github.com/seedium/knexion/commit/1069df40409bfe4e59e95467d0e88aeef4b7f00d))
+* **filter:** use passed timestamp column name ([afa403f](https://github.com/seedium/knexion/commit/afa403f29dd7c5f2f31a8302087bb8eaf172a818))
+
+
+
+
+
 # [0.1.0-alpha.9](https://github.com/seedium/knexion/compare/v0.1.0-alpha.8...v0.1.0-alpha.9) (2022-11-23)
 
 
