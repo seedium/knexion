@@ -27,11 +27,12 @@ export class SortInterceptor<TRecord, TResult>
     if (sort && Array.isArray(sort)) {
       sort.forEach((property) => {
         const [direction, path] = getSortDirection(property);
+        const [placeholder, bindings] = this.buildPath(path);
         queryBuilder.orderByRaw(
-          `${addPrefixColumn(
-            this.buildPath(path),
-            options.alias,
-          )} ${direction} nulls ${direction === 'desc' ? 'last' : 'first'}`,
+          `${addPrefixColumn(placeholder, options.alias)} ${direction} nulls ${
+            direction === 'desc' ? 'last' : 'first'
+          }`,
+          bindings,
         );
       });
     }
@@ -39,13 +40,18 @@ export class SortInterceptor<TRecord, TResult>
     return next.handle();
   }
 
-  private buildPath(path: string): string {
+  private buildPath(path: string): [string, string[]] {
     const [column, ...jsonPath] = path.split('.');
     if (!jsonPath.length) {
-      return path;
+      return ['??', [column]];
     }
-    return `${column}->>${jsonPath
-      .map((property) => `'${property}'`)
-      .join('->>')}`;
+    const [lastProperty] = jsonPath.splice(-1);
+    if (!jsonPath.length) {
+      return [`??->>?`, [column, lastProperty]];
+    }
+    return [
+      `??->${jsonPath.map(() => '??').join('->')}->>?`,
+      [column, ...jsonPath, lastProperty],
+    ];
   }
 }
