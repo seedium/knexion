@@ -26,15 +26,26 @@ export class SortInterceptor<TRecord, TResult>
 
     if (sort && Array.isArray(sort)) {
       sort.forEach((property) => {
-        const [direction, column] = getSortDirection(property);
-        queryBuilder.orderBy(
-          addPrefixColumn(column, options.alias),
-          direction,
-          direction === 'desc' ? 'last' : 'first',
+        const [direction, path] = getSortDirection(property);
+        queryBuilder.orderByRaw(
+          `${addPrefixColumn(
+            this.buildPath(path),
+            options.alias,
+          )} ${direction} nulls ${direction === 'desc' ? 'last' : 'first'}`,
         );
       });
     }
 
     return next.handle();
+  }
+
+  private buildPath(path: string): string {
+    const [column, ...jsonPath] = path.split('.');
+    if (!jsonPath.length) {
+      return path;
+    }
+    return `${column}->>${jsonPath
+      .map((property) => `'${property}'`)
+      .join('->>')}`;
   }
 }
