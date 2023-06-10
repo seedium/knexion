@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.11](https://github.com/seedium/knexion/compare/v0.1.0-alpha.10...v0.1.0-alpha.11) (2023-06-10)
+
+
+### Features
+
+* **cursor-pagination:** allow to paginate through nested json property ([073b9ab](https://github.com/seedium/knexion/commit/073b9abe298ed650b75e17f8c2a811e8edfacf9a))
+
+
+
+
+
 # [0.1.0-alpha.10](https://github.com/seedium/knexion/compare/v0.1.0-alpha.9...v0.1.0-alpha.10) (2023-05-26)
 
 

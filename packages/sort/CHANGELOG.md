@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.11](https://github.com/seedium/knexion/compare/v0.1.0-alpha.10...v0.1.0-alpha.11) (2023-06-10)
+
+
+### Bug Fixes
+
+* **sort:** prevent sql injection by get column name using raw bindings ([12368c4](https://github.com/seedium/knexion/commit/12368c40b7bb1abecdc4325ba688f0662c410dae))
+
+
+### Features
+
+* **sort:** allow to sort by nested jsonb property ([76d7de4](https://github.com/seedium/knexion/commit/76d7de47327e3d82a9da63a0c2d3579713343177))
+
+
+
+
+
 # [0.1.0-alpha.10](https://github.com/seedium/knexion/compare/v0.1.0-alpha.9...v0.1.0-alpha.10) (2023-05-26)
 
 
