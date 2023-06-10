@@ -29,6 +29,7 @@ export class CursorPaginationInterceptor<
     next: KnexionCallHandler<TResult[]>,
   ): Observable<PageList<TResult>> {
     const queryBuilder = context.switchToKnex().getQueryBuilder();
+    const rawBuilder = context.switchToKnex().getRawBuilder();
     const {
       limit = this.options?.defaultLimit ?? 20,
       page_after,
@@ -45,7 +46,14 @@ export class CursorPaginationInterceptor<
     if (page_after) {
       const pageInfo = this.parsePageInfo(page_after);
       queryBuilder.where((builder) =>
-        this.buildCursorQuery(builder, [...sort], pageInfo, alias, true),
+        this.buildCursorQuery(
+          builder,
+          rawBuilder,
+          [...sort],
+          pageInfo,
+          alias,
+          true,
+        ),
       );
       queryBuilder
         .orderBy(addPrefixColumn('created_at', alias), 'desc')
@@ -53,7 +61,14 @@ export class CursorPaginationInterceptor<
     } else if (page_before) {
       const pageInfo = this.parsePageInfo(page_before);
       queryBuilder.where((builder) =>
-        this.buildCursorQuery(builder, [...sort], pageInfo, alias, false),
+        this.buildCursorQuery(
+          builder,
+          rawBuilder,
+          [...sort],
+          pageInfo,
+          alias,
+          false,
+        ),
       );
       queryBuilder
         .orderBy(addPrefixColumn('created_at', alias), 'asc')
@@ -90,6 +105,7 @@ export class CursorPaginationInterceptor<
 
   private buildCursorQuery(
     builder: Knex.QueryBuilder<TRecord, TResult>,
+    rawBuilder: Knex.RawBuilder,
     sort: string[],
     pageInfo: PageInfo<IdType>,
     alias: string,
@@ -120,6 +136,7 @@ export class CursorPaginationInterceptor<
     }
     return this.buildSortCursorQuery(
       builder,
+      rawBuilder,
       sort,
       sortProperty,
       pageInfo,
@@ -130,6 +147,7 @@ export class CursorPaginationInterceptor<
 
   private buildSortCursorQuery(
     builder: Knex.QueryBuilder<TRecord, TResult>,
+    rawBuilder: Knex.RawBuilder,
     sort: string[],
     currentSortProperty: string,
     pageInfo: PageInfo<IdType>,
@@ -137,13 +155,18 @@ export class CursorPaginationInterceptor<
     next?: boolean,
   ): void {
     const [dir, column] = getSortDirection(currentSortProperty);
+    const [placeholder, bindings] = this.buildPath(column);
+    const prefixedPlaceholder = `(${addPrefixColumn(
+      placeholder,
+      alias,
+    )})::integer`;
     const lastSortValue = pageInfo[column];
     const isNullLastSortValue = lastSortValue === null;
     if (isNullLastSortValue) {
-      builder.whereNull(column);
+      builder.whereRaw(`${prefixedPlaceholder} is null`, bindings);
     } else {
       builder.where(
-        column,
+        rawBuilder(prefixedPlaceholder, bindings),
         this.getWhereSortOperator(dir, next),
         lastSortValue,
       );
@@ -151,13 +174,20 @@ export class CursorPaginationInterceptor<
     builder.andWhere((andWereBuilder) => {
       if (!isNullLastSortValue) {
         andWereBuilder.where(
-          column,
+          rawBuilder(prefixedPlaceholder, bindings),
           this.getAndWhereSortOperator(dir, next),
           lastSortValue,
         );
       }
       andWereBuilder.orWhere((orWhereBuilder) =>
-        this.buildCursorQuery(orWhereBuilder, sort, pageInfo, alias, next),
+        this.buildCursorQuery(
+          orWhereBuilder,
+          rawBuilder,
+          sort,
+          pageInfo,
+          alias,
+          next,
+        ),
       );
     });
   }
@@ -194,5 +224,20 @@ export class CursorPaginationInterceptor<
       return sort;
     }
     return [];
+  }
+
+  private buildPath(path: string): [string, string[]] {
+    const [column, ...jsonPath] = path.split('.');
+    if (!jsonPath.length) {
+      return ['??', [column]];
+    }
+    const [lastProperty] = jsonPath.splice(-1);
+    if (!jsonPath.length) {
+      return [`??->>?`, [column, lastProperty]];
+    }
+    return [
+      `??->${jsonPath.map(() => '??').join('->')}->>?`,
+      [column, ...jsonPath, lastProperty],
+    ];
   }
 }
