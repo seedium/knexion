@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.12](https://github.com/seedium/knexion/compare/v0.1.0-alpha.11...v0.1.0-alpha.12) (2023-06-12)
+
+
+### Bug Fixes
+
+* **cursor-pagination:** remove casting to integer sort field ([7df1978](https://github.com/seedium/knexion/commit/7df1978a3d8170fbcd137f84097cf68ab372ebc2))
+
+
+
+
+
 # [0.1.0-alpha.11](https://github.com/seedium/knexion/compare/v0.1.0-alpha.10...v0.1.0-alpha.11) (2023-06-10)
 
 
