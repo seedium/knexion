@@ -156,10 +156,7 @@ export class CursorPaginationInterceptor<
   ): void {
     const [dir, column] = getSortDirection(currentSortProperty);
     const [placeholder, bindings] = this.buildPath(column);
-    const prefixedPlaceholder = `(${addPrefixColumn(
-      placeholder,
-      alias,
-    )})::integer`;
+    const prefixedPlaceholder = `${addPrefixColumn(placeholder, alias)}`;
     const lastSortValue = pageInfo[column];
     const isNullLastSortValue = lastSortValue === null;
     if (isNullLastSortValue) {
