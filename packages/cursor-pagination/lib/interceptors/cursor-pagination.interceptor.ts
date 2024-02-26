@@ -14,7 +14,7 @@ import {
   ComparisonOperator,
   CursorPaginationOptions,
 } from '../interfaces';
-import { getSortDirection } from '@knexion/sort';
+import { buildSortPath, getSortDirection } from '@knexion/sort';
 
 export class CursorPaginationInterceptor<
   TRecord,
@@ -155,15 +155,14 @@ export class CursorPaginationInterceptor<
     next?: boolean,
   ): void {
     const [dir, column] = getSortDirection(currentSortProperty);
-    const [placeholder, bindings] = this.buildPath(column);
-    const prefixedPlaceholder = `${addPrefixColumn(placeholder, alias)}`;
+    const [placeholder, bindings] = buildSortPath(column, alias);
     const lastSortValue = pageInfo[column];
     const isNullLastSortValue = lastSortValue === null;
     if (isNullLastSortValue) {
-      builder.whereRaw(`${prefixedPlaceholder} is null`, bindings);
+      builder.whereRaw(`${placeholder} is null`, bindings);
     } else {
       builder.where(
-        rawBuilder(prefixedPlaceholder, bindings),
+        rawBuilder(placeholder, bindings),
         this.getWhereSortOperator(dir, next),
         lastSortValue,
       );
@@ -171,7 +170,7 @@ export class CursorPaginationInterceptor<
     builder.andWhere((andWereBuilder) => {
       if (!isNullLastSortValue) {
         andWereBuilder.where(
-          rawBuilder(prefixedPlaceholder, bindings),
+          rawBuilder(placeholder, bindings),
           this.getAndWhereSortOperator(dir, next),
           lastSortValue,
         );
@@ -221,20 +220,5 @@ export class CursorPaginationInterceptor<
       return sort;
     }
     return [];
-  }
-
-  private buildPath(path: string): [string, string[]] {
-    const [column, ...jsonPath] = path.split('.');
-    if (!jsonPath.length) {
-      return ['??', [column]];
-    }
-    const [lastProperty] = jsonPath.splice(-1);
-    if (!jsonPath.length) {
-      return [`??->>?`, [column, lastProperty]];
-    }
-    return [
-      `??->${jsonPath.map(() => '??').join('->')}->>?`,
-      [column, ...jsonPath, lastProperty],
-    ];
   }
 }

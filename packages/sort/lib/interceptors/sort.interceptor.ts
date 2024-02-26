@@ -3,10 +3,9 @@ import {
   KnexionExecutionContext,
   KnexionCallHandler,
   KnexionInterceptor,
-  addPrefixColumn,
   SelectDatabaseOptions,
 } from '@knexion/core';
-import { getSortDirection } from '../utils';
+import { buildSortPath, getSortDirection } from '../utils';
 import { SortOptions } from '../interfaces';
 
 export class SortInterceptor<TRecord, TResult>
@@ -27,9 +26,9 @@ export class SortInterceptor<TRecord, TResult>
     if (sort && Array.isArray(sort)) {
       sort.forEach((property) => {
         const [direction, path] = getSortDirection(property);
-        const [placeholder, bindings] = this.buildPath(path);
+        const [placeholder, bindings] = buildSortPath(path, options.alias);
         queryBuilder.orderByRaw(
-          `${addPrefixColumn(placeholder, options.alias)} ${direction} nulls ${
+          `${placeholder} ${direction} nulls ${
             direction === 'desc' ? 'last' : 'first'
           }`,
           bindings,
@@ -38,20 +37,5 @@ export class SortInterceptor<TRecord, TResult>
     }
 
     return next.handle();
-  }
-
-  private buildPath(path: string): [string, string[]] {
-    const [column, ...jsonPath] = path.split('.');
-    if (!jsonPath.length) {
-      return ['??', [column]];
-    }
-    const [lastProperty] = jsonPath.splice(-1);
-    if (!jsonPath.length) {
-      return [`??->>?`, [column, lastProperty]];
-    }
-    return [
-      `??->${jsonPath.map(() => '??').join('->')}->>?`,
-      [column, ...jsonPath, lastProperty],
-    ];
   }
 }
