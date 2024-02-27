@@ -5,7 +5,7 @@ import {
   KnexionInterceptor,
   SelectDatabaseOptions,
 } from '@knexion/core';
-import { buildSortPath, getSortDirection } from '../utils';
+import { extractModifiers, getSortDirection } from '../utils';
 import { SortOptions } from '../interfaces';
 
 export class SortInterceptor<TRecord, TResult>
@@ -26,12 +26,15 @@ export class SortInterceptor<TRecord, TResult>
     if (sort && Array.isArray(sort)) {
       sort.forEach((property) => {
         const [direction, path] = getSortDirection(property);
-        const [placeholder, bindings] = buildSortPath(path, options.alias);
+        const { placeholder, placeholderBindings } = extractModifiers(
+          path,
+          options.alias,
+        );
         queryBuilder.orderByRaw(
           `${placeholder} ${direction} nulls ${
             direction === 'desc' ? 'last' : 'first'
           }`,
-          bindings,
+          placeholderBindings,
         );
       });
     }

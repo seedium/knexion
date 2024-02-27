@@ -14,7 +14,7 @@ import {
   ComparisonOperator,
   CursorPaginationOptions,
 } from '../interfaces';
-import { buildSortPath, getSortDirection } from '@knexion/sort';
+import { extractModifiers, getSortDirection } from '@knexion/sort';
 
 export class CursorPaginationInterceptor<
   TRecord,
@@ -154,15 +154,18 @@ export class CursorPaginationInterceptor<
     alias: string,
     next?: boolean,
   ): void {
-    const [dir, column] = getSortDirection(currentSortProperty);
-    const [placeholder, bindings] = buildSortPath(column, alias);
+    const [dir, sortExpression] = getSortDirection(currentSortProperty);
+    const { column, where, whereBindings } = extractModifiers(
+      sortExpression,
+      alias,
+    );
     const lastSortValue = pageInfo[column];
     const isNullLastSortValue = lastSortValue === null;
     if (isNullLastSortValue) {
-      builder.whereRaw(`${placeholder} is null`, bindings);
+      builder.whereRaw(`${where} is null`, whereBindings);
     } else {
       builder.where(
-        rawBuilder(placeholder, bindings),
+        rawBuilder(where, whereBindings),
         this.getWhereSortOperator(dir, next),
         lastSortValue,
       );
@@ -170,7 +173,7 @@ export class CursorPaginationInterceptor<
     builder.andWhere((andWereBuilder) => {
       if (!isNullLastSortValue) {
         andWereBuilder.where(
-          rawBuilder(placeholder, bindings),
+          rawBuilder(where, whereBindings),
           this.getAndWhereSortOperator(dir, next),
           lastSortValue,
         );
