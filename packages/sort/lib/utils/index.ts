@@ -1,2 +1,2 @@
-export * from './build-sort-path';
+export * from './extract-modifiers';
 export * from './get-sort-direction';
