@@ -43,7 +43,7 @@
     "knex": "2.4.2",
     "knexion-test-utils": "workspace:^",
     "reflect-metadata": "0.1.13",
-    "rxjs": "7.5.7",
+    "rxjs": "7.8.1",
     "ts-jest": "29.0.5",
     "typescript": "4.8.4"
   }
